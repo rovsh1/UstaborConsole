@@ -1,0 +1,67 @@
+<div class="head"><span class="method">POST</span><span class="url">/login/</span> — Позволяет получить код авторизации, для дальнейшей идентификации пользователя.</div>
+<div class="params">
+	<h3>Параметры (вход по логину и паролю)</h3>
+	<table>
+		<tr>
+			<th>login</th>
+			<td>
+				Логин пользователя, телефон или email.
+				<div class="param-opts"><b>обязательный</b></div>
+			</td>
+		</tr>
+		<tr>
+			<th>password</th>
+			<td>
+				Пароль пользователя.
+				<div class="param-opts"><b>обязательный</b></div>
+			</td>
+		</tr>
+	</table>
+	<h3>Параметры (вход через соц сети)</h3>
+	<table>
+		<tr>
+			<th>provider</th>
+			<td>Идентификатор социальной сети.<blockquote>На данный момент доступны соц сети facebook и googleplus.</blockquote>
+				<br /><div class="param-opts"><b>обязательный</b></div>
+			</td>
+		</tr>
+		<tr>
+			<th>token</th>
+			<td>Код доступа соц сети.<div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+	</table>
+</div>
+<div class="result">
+	<h3>Ответ <span>{объект}</span></h3>
+	<table>
+		<tr>
+			<th>user_id</th>
+			<td>Идентификатор пользователя<div class="param-opts">целое число</div>
+			</td>
+		</tr>
+		<tr>
+			<th>token</th>
+			<td>Код авторизации, для передачи в заголовке, см. <a href="#authorization">п. "Авторизация пользователя"</a></td>
+		</tr>
+		<tr>
+			<th>registration</th>
+			<td>
+				Если запрос осуществлялся через соц сеть и пользователя с данным акаунтом не найдено, автоматически происходит регистрация и авторизацие нового пользователя, в данном случае будет возвращен этот флаг.
+				<div class="param-opts">булево, всегда истина</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="erors">
+	<h3>Ошибки</h3>
+	<table>
+		<tr>
+			<th>Provider invalid</th>
+			<td>Недопустимый параметр provider</td>
+		</tr>
+		<tr>
+			<th>Token undefined</th>
+			<td>Недопустимый параметр token</td>
+		</tr>
+	</table>
+</div>

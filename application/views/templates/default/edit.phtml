@@ -1,0 +1,9 @@
+<form method="post" class="" enctype="multipart/form-data">
+	<?php echo $this->h1(); ?>
+	<div class="card">
+		<div class="card-body">
+			<?php echo $this->form->report(), $this->form->render(); ?>
+		</div>
+	</div>
+	<?php $this->renderTemplate('default', 'form-buttons'); ?>
+</form>

@@ -1,0 +1,43 @@
+<div class="head"><span class="method">POST</span><span class="url">/project/edit/<b>ID</b>/</span> — Изменить проект.</div>
+<h3>Общие параметры</h3>
+<ul>
+	<li><span class="l">Авторизация</span></li>
+</ul>
+<div class="params">
+	<h3>Параметры</h3>
+	<table>
+		<tr>
+			<th>ID</th>
+			<td>Идентификатор проекта.<blockquote>Для новых проектов ID=new - /project/edit/new/</blockquote><br /><div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>category_id</th>
+			<td>Идентификатор категории. <div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>name</th>
+			<td>Заголовок. <div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>text</th>
+			<td>Описание проекта. <div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>images</th>
+			<td>Фото. <div class="param-opts">массив картинок, <b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>deleteimages</th>
+			<td>Массив кодов картинок для удаления. <div class="param-opts">массив, <b>опционально</b></div></td>
+		</tr>
+	</table>
+</div>
+<div class="result">
+	<h3>Ответ <span>булево</span></h3>
+</div>
+<div class="erors">
+	<h3>Ошибки</h3>
+	<p>В ходе выполнения могут произойти общие ошибки.</p>
+</div>
+
+

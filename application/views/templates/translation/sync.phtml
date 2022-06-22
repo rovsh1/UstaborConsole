@@ -1,0 +1,139 @@
+<?php echo $this->h1(); ?>
+<div class="page-translation translation-sync card">
+	<div class="card-body report-form">
+		<?php echo $this->form->report(), $this->form->render('portal_id'); ?>
+		<div class="sync-params" id="sync-params"></div>
+		<div class="buttons">
+			<button type="button" id="btn-sync" class="btn-submit">Синхронизация</button><div class="response-log" id="sync-log"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var portalSelect = $('#form_data_portal_id');
+	var paramsEl = $('#sync-params');
+	var btnSync = $('#btn-sync');
+	var logEl = $('#sync-log');
+	var currentLanguages = <?php
+	$codes = [];
+	foreach (Translation::getLanguages() as $l)
+		$codes[] = $l->code;
+	echo json_encode($codes);
+	?>;
+	var portalApi;
+	
+	var initParams = function() {
+		paramsEl.html('');
+		addParamLanguages('Текущие языки', currentLanguages);
+	};
+	var addParam = function(label, value, cls) {
+		var s = '<div class="param ' + cls + '">';
+		s += '<div class="label">' + label + '</div>';
+		s += '<div class="value">' + value + '</div>';
+		s += '</div>';
+		paramsEl.append(s);
+	};
+	var addParamLanguages = function(label, languages) {
+		var i, s = '';
+		for (i = 0; i < languages.length; i++) {
+			s += '<img src="/images/flag/' + languages[i] + '.svg" />';
+		}
+		addParam(label, s, 'languages');
+	};
+	portalSelect.change(function() {
+		initParams();
+		if (this.value) {
+			paramsEl.addClass('loading')
+			Portal.get(this.value, function(api) {
+				paramsEl.removeClass('loading')
+				btnSync.parent().show();
+				portalApi = api;
+				addParamLanguages('Языки портала', api.getLanguages());
+			});
+		} else {
+			btnSync.parent().hide();
+		}
+	}).change();
+	btnSync.click(function(){
+		logEl.html('');
+		btnSync.addClass('loading').attr('disabled', true);
+		Http.get('/translation/sync/' + portalApi.id + '/', function(r){
+			btnSync.removeClass('loading').attr('disabled', false);
+			logEl.html(JSON.stringify(r));
+		});
+	});
+	
+	
+	return;
+	var portalApi,
+		portalLanguages;
+	var list = $('#translation-list');
+	var thisItems = <?php echo json_encode($this->items); ?>,
+		items;
+	
+	function Item(dataThis) {
+		dataThis = dataThis || {};
+		var dataPortal;
+		
+		this.name = dataThis.name;
+		
+		this.setPortalData = function(data) {
+			dataPortal = data;
+			this.name = data.name;
+		};
+		this.isEqual = function() {
+			var i, code;
+			for (i = 0; i < portalLanguages.length; i++) {
+				code = portalLanguages[i];
+				if (dataPortal[code] !== dataThis[code])
+					return false;
+			}
+			return true;
+		};
+	}
+	
+	var findItem = function(name) {
+		for (var i = 0, l = items.length; i < l; i++) {
+			if (items[i].name === name)
+				return items[i];
+		}
+		return null;
+	}
+	var init = function(portalItems) {
+		list.removeClass('loading');
+		var item, i, l = thisItems.length;
+		for (i = 0; i < l; i++) {
+			items[items.length] = new Item(thisItems[i]);
+		}
+		l = portalItems.length;
+		for (i = 0; i < l; i++) {
+			item = findItem(portalItems[i].name);
+			if (!item) {
+				item = new Item();
+				items[item.length] = item;
+			}
+			item.setPortalData(portalItems[i]);
+		}
+		
+		
+	};
+	
+	portalSelect.change(function() {
+		if (this.value) {
+			list.addClass('loading');
+			location.hash = 'portal-' + this.value;
+			Portal.get(this.value, function(api) {
+				portalApi = api;
+				portalLanguages = api.getLanguages();
+				api.getTranslation(init);
+			});
+		} else {
+			location.hash = '';
+		}
+	});
+	if (location.hash)
+		portalSelect
+			.val(location.hash.replace('#portal-', ''))
+			.change();
+});
+</script>

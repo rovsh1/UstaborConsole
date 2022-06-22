@@ -1,0 +1,47 @@
+div.monitor-status{line-height:20px;}
+div.monitor-status div.inner div>*{margin-right:16px;display:inline-block;}
+div.monitor-status span.status.ok{color:var(--success);}
+div.monitor-status span.status.down{color:var(--error);}
+
+div.status-items{display:flex;flex-wrap:wrap;padding-right:0;padding-bottom:0;}
+div.status-item{border:1px solid var(--border);border-radius:4px;padding:8px 16px;line-height:20px;margin-bottom:16px;flex-grow:1;flex-basis:45%;margin-right:16px;width:40%;}
+div.status-item div.title{font-weight:normal;cursor:pointer;}
+div.status-item div.title:before{}
+div.status-item div.title:hover{}
+div.status-item div.inner{max-height:140px;overflow:auto;display:none;}
+div.status-item.status-ok div.title{color:var(--success);}
+div.status-item.status-error div.title{color:var(--error);}
+
+div.dashboard-site{}
+div.dashboard-site .btn-preview{display:inline-block;width:16px;height:16px;background:url("/images/ui/external-link.svg") 50% 50% no-repeat;vertical-align:top;opacity:.7;}
+div.dashboard-site .btn-preview:hover{opacity:1;}
+div.dashboard-site div.card-body{display:flex;}
+div.dashboard-site div.status-tabs{width:120px;line-height:16px;flex-shrink:0;}
+div.dashboard-site div.status-tabs > div{padding:8px 16px 8px 0;cursor:pointer;}
+div.dashboard-site div.status-tabs > div div.status{content:'';display:inline-block;width:16px;height:16px;margin-right:8px;vertical-align:top;background-size:12px 12px;background-position:50% 50%;background-repeat:no-repeat;}
+div.dashboard-site div.status-tabs > div.status-ok div.status{background-image:url("/images/ui/checkmark.svg");}
+div.dashboard-site div.status-tabs > div.status-error div.status{background-image:url("/images/ui/warning.svg");}
+div.dashboard-site div.status-tabs > div:hover{color:var(--link);}
+div.dashboard-site div.status-tabs > div.current{color:var(--link);}
+div.dashboard-site div.status-content{flex-grow:1;border:1px solid var(--border);border-radius:4px;padding:16px;width:10px;}
+div.dashboard-site div.content-inner{display:none;}
+div.dashboard-site div.content-inner pre{line-height:20px;font-size:11px;overflow:auto;max-height:400px;width:100%;}
+div.dashboard-site div.content-inner h3{font-weight:normal;margin-bottom:8px;text-decoration:underline;font-size:15px;}
+div.dashboard-site div.content-inner h3:not(:first-child){margin-top:16px;}
+div.dashboard-site div.content-inner table{line-height:16px;}
+div.dashboard-site div.content-inner th{padding:4px 0;font-weight:normal;text-align:left;color:#ccc;}
+div.dashboard-site div.content-inner td{padding:4px 8px;}
+div.dashboard-site div.content-inner ul{list-style:circle;margin-left:16px;line-height:20px;}
+
+div.status-item.expanded div.title{padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--border);}
+div.status-item.expanded div.inner{display:block;}
+div.dashboard-site div.content-buttons{margin-top:16px;text-align:right;font-size:11px;}
+div.dashboard-site div.content-buttons .btn{display:inline-block;margin-left:16px;color:var(--link);cursor:pointer;}
+div.dashboard-site div.content-buttons .btn:hover{text-decoration:underline;}
+
+div.cron-status div.inner{white-space:pre-wrap;}
+
+div.card-cronjobs{line-height:20px;}
+div.card-cronjobs div.task{margin-bottom:16px;}
+div.card-cronjobs div.task:last-child{margin-bottom:0;}
+div.card-cronjobs ul{list-style:circle;margin-left:24px;}

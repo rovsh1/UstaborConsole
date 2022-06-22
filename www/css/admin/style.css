@@ -1,0 +1,71 @@
+h1{font-size:20px;margin-bottom:16px;padding:0 9px;}
+
+header{z-index:10;}
+main{padding-bottom:0;padding-left:220px;background:#f3f5f7;}
+main .mainmenu{position:fixed;top:0;left:0;width:220px;height:100%;padding-top:58px;background:var(--background-head);z-index:5;}
+main .mainmenu div.menu-inner{padding:32px 0;line-height:32px;height:100%;overflow:auto;}
+main .mainmenu nav{display:none;}
+main .mainmenu div.expanded nav{display:block;}
+main .mainmenu div.label{padding:0 32px;color:#ffffff;cursor:pointer;position:relative;}
+main .mainmenu div.label:before{content:'';display:inline-block;position:absolute;border-top:4px solid #ffffff;border-left:4px solid transparent;border-right:4px solid transparent;top:14px;left:16px;}
+main .mainmenu div.expanded div.label:before{border-top:none;border-bottom:4px solid #ffffff;}
+main .mainmenu div.label:hover:before{border-top-color:var(--submit);}
+main .mainmenu div.expanded div.label:hover:before{border-bottom-color:var(--submit);}
+main .mainmenu a{display:block;padding:0 32px;color:#aaaaaa;}
+main .mainmenu a:hover{background:var(--submit);color:#ffffff;}
+main .mainmenu a.current{color:var(--submit);}
+main .mainmenu a.current:hover{color:#ffffff;}
+main .mainmenu hr{margin:9px 32px;border:none;height:1px;background:var(--background-alt);}
+
+div.menu-actions{display:inline-block;margin-left:16px;position:relative;height:26px;vertical-align:top;}
+div.menu-actions div.btn-menu{width:26px;height:26px;cursor:pointer;background:url("/images/ui/more.svg") 50% 50% no-repeat;background-size:16px 16px;opacity:.7;border-radius:2px;}
+div.menu-actions div.btn-menu:hover{opacity:1;background-color:var(--border);}
+div.menu-actions nav{display:none;top:100%;left:0;margin-top:9px;}
+
+.menu a:hover{background-color:var(--background);}
+nav.menu-icon a.view{background-image:url("/images/ui/foreign.svg");}
+nav.menu-icon a.add{background-image:url("/images/ui/plus.svg");}
+nav.menu-icon a.edit{background-image:url("/images/ui/edit.svg");}
+nav.menu-icon a.auth{background-image:url("/images/ui/login.svg");}
+nav.menu-icon a.banlist{background-image:url("/images/ui/ban.svg");}
+
+main div.content{padding:16px;}
+
+div.h1-wrap{position:relative;margin-bottom:16px;}
+div.h1-wrap h1{line-height:26px;display:inline-block;margin:0;padding:0 0 0 9px;}
+div.h1-wrap form.quicksearch{position:absolute;top:0;right:0;}
+div.h1-wrap form.quicksearch input{width:260px;height:26px;padding:0 35px 0 9px;vertical-align:top;}
+div.h1-wrap form.quicksearch button{position:absolute;top:0;right:0;width:26px;height:26px;background:url("/images/ui/search.svg") 50% 50% no-repeat;background-size:16px 16px;border:none;cursor:pointer;opacity:.8;}
+div.h1-wrap form.quicksearch button:hover{opacity:1;}
+
+.card{background:#fff;border-radius:2px;margin-top:16px;}
+.card:first-child{margin-top:0;}
+.card .card-title{padding:16px 16px 0 16px;}
+.card .card-title h1,
+.card .card-title h2{margin-top:0;border-bottom:1px solid #f2f2f2;padding:0 9px 16px 9px;}
+.card .card-title h2>span{font-size:13px;display:inline-block;margin-left:16px;}
+.card-body{padding:16px 16px;}
+.card h1{font-size:20px;}
+.card h2{font-size:16px;font-weight:400;}
+.card h1 a,
+.card h2 a{font-size:13px;font-weight:normal;display:inline-block;margin-left:16px;}
+
+.card-grid .card-title{cursor:pointer;}
+.card-grid .card-title h2:before{content:'';display:inline-block;width:16px;height:16px;background:url("/images/ui/arrow-back.svg") 50% 50% no-repeat;background-size:12px 12px;transform:rotate(90deg);margin-right:9px;vertical-align:middle;}
+.card-grid.collapsed .card-title h2{border-bottom:none;}
+.card-grid.collapsed .card-title h2:before{transform:rotate(-90deg);}
+.card-grid.collapsed .card-body{display:none;}
+
+.card hr{height:1px;border:none;margin:16px 0;background:var(--border);}
+.card .card-title ul.tabs{border-bottom:1px solid var(--border);}
+.card .card-title ul.tabs li{display:inline-block;vertical-align:top;padding:0px 16px 13px 16px;cursor:pointer;border-bottom:3px solid transparent;}
+.card .card-title ul.tabs li:hover{color:var(--submit);}
+.card .card-title ul.tabs li.current{border-bottom-color:var(--submit);}
+
+div.form-buttons{margin-top:16px;padding:0 16px;text-align:right;}
+div.form-buttons a{display:inline-block;height:32px;vertical-align:top;line-height:32px;}
+div.form-buttons a:hover{color:#ffffff;}
+div.form-buttons input,
+div.form-buttons button{height:32px;}
+div.form-buttons>*{margin-right:9px;}
+div.form-buttons>*:last-child{margin-right:0;}

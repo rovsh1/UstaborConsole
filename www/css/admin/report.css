@@ -1,0 +1,43 @@
+div.report-response{}
+div.report-response div.response-toolbar{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);line-height:26px;}
+div.report-response div.response-toolbar>*{display:inline-block;vertical-align:top;margin-right:16px;}
+div.report-response div.response-toolbar .btn-cancel,
+div.report-response div.response-toolbar .btn-submit{color:#ffffff;cursor:pointer;font-size:11px;height:26px;}
+div.report-response div.response-toolbar div.mail{position:relative;float:right;}
+div.report-response div.response-toolbar input{height:26px;border-radius:3px;padding:0 59px 0 9px;vertical-align:top;}
+div.report-response div.response-toolbar div.mail button{position:absolute;top:0;right:0;}
+div.report-response div.response-content{line-height:18px;max-height:600px;overflow:auto;}
+
+div.response-log{line-height:16px;}
+div.report-response div.response-log{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:16px;}
+div.buttons div.response-log{color:var(--text);display:inline-block;margin-left:16px;vertical-align:top;padding:8px 0;}
+
+div.page-tests{}
+div.page-tests fieldset{display:inline-block;vertical-align:top;margin-right:16px;line-height:20px;padding:8px 16px 16px 16px;}
+div.page-tests fieldset input[type="checkbox"]{margin-right:5px;}
+div.page-tests fieldset.variables div.variable{margin-bottom:8px;}
+div.page-tests fieldset.variables label{display:inline-block;vertical-align:top;width:140px;padding:4px 0;}
+div.page-tests fieldset.variables input{height:28px;}
+div.page-tests span.method{}
+div.page-tests div.test-report{line-height:18px;}
+div.page-tests div.test-report div.test{padding-left:16px;position:relative;margin-bottom:16px;}
+div.page-tests div.test-report div.test:last-child{margin-bottom:0;}
+div.page-tests div.test-report div.test .error{color:var(--error);}
+div.page-tests div.test-report div.test div.head{margin-bottom:5px;cursor:pointer;}
+div.page-tests div.test-report div.test div.head:before{content:'';display:inline-block;border-radius:50%;width:8px;height:8px;position:absolute;top:5px;left:0;}
+div.page-tests div.test-report div.test div.head:hover span.url{text-decoration:underline;}
+div.page-tests div.test-report div.test.ok div.head:before{background:var(--success);}
+div.page-tests div.test-report div.test.failed div.head:before{background:var(--error);}
+div.page-tests div.test-report div.test span{display:inline-block;vertical-align:top;margin-right:16px;}
+div.page-tests div.test-report div.test span.method{width:50px;}
+div.page-tests div.test-report div.test span.url{}
+div.page-tests div.test-report div.test span.status{width:80px;text-align:right;}
+div.page-tests div.test-report div.test.ok span.status{color:var(--success);}
+div.page-tests div.test-report div.test.failed span.status{color:var(--error);}
+div.page-tests div.test-report div.test div.data{color:var(--text);}
+div.page-tests div.test-report div.test div.data{display:none;}
+div.page-tests div.test-report div.test.expanded div.data{display:block;}
+div.page-tests div.test-report div.tests div.item{}
+div.page-tests div.test-report div.tests span{width:50px;}
+div.page-tests div.test-report div.tests div.item.pass span{color:var(--success);}
+div.page-tests div.test-report div.tests div.item.failed span{color:var(--error);}

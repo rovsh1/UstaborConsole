@@ -1,0 +1,15 @@
+
+div.paginator{margin-top:16px;text-align:right;white-space:nowrap;line-height:24px;font-size:13px;border:solid 1px transparent;}
+div.paginator li{display:inline-block;vertical-align:top;margin-left:9px;border-radius:2px;text-align:center;}
+div.paginator li.page{border-color:var(--link);}
+div.paginator li.dot{}
+div.paginator li:first-child{margin-left:0;}
+div.paginator a{display:block;color:var(--submit);}
+div.paginator a:hover{color:var(--link-hover);}
+div.paginator li.page a{padding:0 9px;}
+div.paginator li.current{background-color:var(--submit);color:#ffffff !important;padding:0 9px;}
+div.paginator li.count{margin-left:16px;}
+div.paginator li.next,
+div.paginator li.prev{}
+div.paginator li.next a,
+div.paginator li.prev a{}

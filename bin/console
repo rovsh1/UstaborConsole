@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+//is command line interface
+if (php_sapi_name() !== 'cli') // cgi-fcgi
+	exit;
+
+set_time_limit(0);
+include realpath(__DIR__ . '/../') . '/initialize.php';
+
+define('CONSOLE_PATH', __DIR__ . '/lib');
+
+Autoload::addPath(CONSOLE_PATH, 'Console\\', '');
+
+Console\Handler::run();

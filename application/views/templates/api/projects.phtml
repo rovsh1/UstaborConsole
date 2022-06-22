@@ -1,0 +1,170 @@
+<div class="head"><span class="method">GET</span><span class="url">/projects/</span> — Список проектов и рекламы.</div>
+<h3>Общие параметры</h3>
+<ul>
+	<li><span class="l">Параметры списка</span></li>
+	<li><span class="l">Сайт</span></li>
+	<li><span class="l">Страна</span></li>
+</ul>
+<div class="params">
+	<h3>Параметры</h3>
+	<table>
+		<tr>
+			<th>category_id</th>
+			<td>Идентификатор категории.<div class="param-opts">целочисленный, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>master_id</th>
+			<td>Идентификатор мастера.<div class="param-opts">целочисленный, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>city_id</th>
+			<td>Идентификатор города.<div class="param-opts">целочисленный, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>district_id</th>
+			<td>Идентификатор района.<div class="param-opts">целочисленный, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>favorite</th>
+			<td>Если данный параметр указан, то будут возвращены только избранные проекты авторизованного пользователя.<blockquote>Для работы данного параметра необходима авторизация пользователя.</blockquote><br /><div class="param-opts">булево, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>session</th>
+			<td>Массив идентификаторов рекламных проектов, которые необходимо исключить из ответа.<div class="param-opts">массив, <b>опционально</b></div></td>
+		</tr>
+	</table>
+	<h3>Специальные параметры сортировки</h3>
+	<table>
+		<tr>
+			<th>master_presentation</th>
+			<td>Сортировка по имени мастера.</td>
+		</tr>
+		<tr>
+			<th>master_rating</th>
+			<td>Сортировка по рейтингу мастера.</td>
+		</tr>
+	</table>
+</div>
+<div class="result">
+	<h3>Ответ <span>[массив]</span></h3>
+	<div class="params">
+		<table>
+			<tr>
+				<th>id</th>
+				<td>Идентификатор<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>country_id</th>
+				<td>Идентификатор страны<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>category_id</th>
+				<td>Идентификатор категории<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>category_name</th>
+				<td>Наименование катогории.</td>
+			</tr>
+			<tr>
+				<th>name</th>
+				<td>Наименование</td>
+			</tr>
+			<tr>
+				<th>images</th>
+				<td>Основное изображение<div class="param-opts">картинка</div></td>
+			</tr>
+		</table>
+	</div>
+	<h3>Дополнительные поля проекта</h3>
+	<div class="params">
+		<table>
+			<tr>
+				<th>master_id</th>
+				<td>Идентификатор мастера.</td>
+			</tr>
+			<tr>
+				<th>master_presentation</th>
+				<td>Полное имя мастера.</td>
+			</tr>
+			<tr>
+				<th>master_phone</th>
+				<td>Телефон мастера.</td>
+			</tr>
+			<tr>
+				<th>master_about</th>
+				<td>Описание "О себе" мастера.</td>
+			</tr>
+			<tr>
+				<th>text</th>
+				<td>Описание проекта.</td>
+			</tr>
+			<tr>
+				<th>master_badges</th>
+				<td>Количество бейджиков мастера.</td>
+			</tr>
+			<tr>
+				<th>master_rating</th>
+				<td>Рейтинг мастера.</td>
+			</tr>
+			<tr>
+				<th>master_avatar</th>
+				<td>Изображение мастера.<div class="param-opts">картинка</div></td>
+			</tr>
+		</table>
+	</div>
+	<h3>Дополнительные поля рекламы</h3>
+	<div class="params">
+		<table>
+			<tr>
+				<th>ad</th>
+				<td>Признак рекламного проекта.<div class="param-opts">булево</div></td>
+			</tr>
+			<tr>
+				<th>url</th>
+				<td>Ссылка на страницу рекламы.</td>
+			</tr>
+			<tr>
+				<th>social</th>
+				<td>Массив ссылок на социальные сети рекламы. Поля элементов массива:<ul>
+					<li><span class="l">name - Наименование в соответствии с выбранным языком</span></li>
+					<li><span class="l">url - Ссылка</span></li>
+					<li><span class="l">icon - Иконка социальной сети</span></li>
+				</ul><div class="param-opts">массив</div></td>
+			</tr>
+			<tr>
+				<th>advertiser_language</th>
+				<td>Язык рекламодателя</td>
+			</tr>
+			<tr>
+				<th>advertiser_presentation</th>
+				<td>Полное наименование рекламодателя.</td>
+			</tr>
+			<tr>
+				<th>company_url</th>
+				<td>Ссылка на сайт компании.</td>
+			</tr>
+			<tr>
+				<th>advertiser_phone</th>
+				<td>Телефон рекламодателя.</td>
+			</tr>
+			<tr>
+				<th>advertiser_about_label</th>
+				<td>Заголовок описание (например "О копании").</td>
+			</tr>
+			<tr>
+				<th>advertiser_about</th>
+				<td>Описание.</td>
+			</tr>
+			<tr>
+				<th>advertiser_avatar</th>
+				<td>Логотип рекламодателя.<div class="param-opts">картинка</div></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="erors">
+	<h3>Ошибки</h3>
+	<p>В ходе выполнения могут произойти общие ошибки.</p>
+</div>
+
+

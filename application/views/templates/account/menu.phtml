@@ -1,0 +1,20 @@
+<?php
+$user = $this->authUser;
+?>
+<div class="">
+	<div class="head">
+		<div class="inner">
+			<div id="pmh-avatar"><?php echo user_avatar($user->image); ?></div>
+			<div class="name"><?php echo $user->presentation; ?></div>
+		</div>
+	</div>
+	<nav class="menu-icon">
+		<a href="/account/" class="profile">Личный кабинет</a>
+		<a href="/account/logout/" class="logout">Выйти</a>
+	</nav>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#pmh-avatar').avatarUpload();
+});
+</script>

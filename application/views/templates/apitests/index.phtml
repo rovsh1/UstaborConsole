@@ -1,0 +1,134 @@
+<?php 
+use Api\Model\Tests\Api\Handler as TestHandler;
+
+$handler = new TestHandler();
+?>
+<?php echo $this->h1(); ?>
+<div class="card page-tests" id="tests-panel">
+	<div class="card-body">
+		<form>
+			<fieldset class="tests"><legend>Тесты</legend></fieldset>
+			<fieldset class="variables">
+				<legend>Переменные</legend>
+				<div class="fields"></div>
+			</fieldset>
+			<div class="form-buttons">
+				<button type="submit" class="btn-submit">Запустить</button>
+			</div>
+		</form>
+		<div class="test-report"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var panel = $('#tests-panel');
+	var report = panel.find('div.test-report');
+	var fieldsetTests = panel.find('fieldset.tests');
+	var fieldsetVariables = panel.find('fieldset.variables');
+	
+	var variables = new function() {
+		var $el = fieldsetVariables.find('div.fields');
+		
+		this.set = function(data) {
+			var html = '';
+			var i, n;
+			for (i in data) {
+				n = 'var_' + i;
+				html += '<div class="variable">';
+				html += '<label for="' + n + '">' + i + '</label>';
+				html += '<input type="text" name="' + i + '" id="' + n + '" value="' + data[i] + '" />';
+				html += '</div>';
+			}
+			$el.html(html);
+		};
+		this.get = function() {
+			var data = {};
+			$el.find('input').each(function(){
+				var inpt = $(this);
+				data[inpt.attr('name')] = inpt.val();
+			});
+			return data;
+		};
+	};
+	
+	function Test(name) {
+		var id = 'cb_test_' + name;
+		var input;
+		
+		var init = function() {
+			var wrap = '<div class="test">';
+			wrap += '<input type="checkbox" id="' + id + '" />';// checked="checked"
+			wrap += '<label for="' + id + '">' + name + '</label>';
+			wrap += '</div>';
+			wrap = $(wrap);
+			fieldsetTests.append(wrap);
+			input = wrap.find('input');
+		};
+		this.run = function(callback) {
+			$.getJSON('/apitests/test/' + name + '/', variables.get(), function(r){
+				var result = r.result;
+				var info = r.info;
+				var html = '';
+				variables.set(r.variables);
+				html += '<div class="test ' + result.status.toLowerCase() + '">';
+				html += '<div class="head">'
+						+ '<span class="method">' + r.test.method + '</span>'
+						+ '<span class="url">' + r.test.url + '</span>'
+						+ '<span class="status">' + (info.code || 0) + ' ' + result.status + '</span>'
+						+ '<span class="time">' + (info.total_time || 0) + 's</span>'
+						+ '</div>';
+				html += '<div class="data">';
+				if (result.error)
+					html += '<div class="error">' + result.error + '</div>';
+				html += '<div class="text">' + JSON.stringify(result.data) + '</div>';
+				html += '</div>';
+				html += '<div class="tests">';
+				var i, n;
+				for (i in result.tests) {
+					n = (result.tests[i] ? 'PASS' : 'FAILED');
+					html += '<div class="item ' + n.toLowerCase() + '"><span>' + n + '</span>' + i + '</div>';
+				}
+				html += '</div>';
+				html += '</div>';
+				html = $(html);
+				report.append(html);
+				html.find('div.head').click(function(){ html.toggleClass('expanded'); });
+				callback();
+			});
+		};
+		this.isActive = function() {
+			return input.is(':checked');
+		};
+		
+		init();
+	}
+	
+	var tests = [];
+	
+	<?php
+	echo 'variables.set(' . json_encode($handler->params) . ');';
+	foreach ($handler->getTests() as $test) {
+		echo 'tests[tests.length]=new Test("' . strtolower($test->name) . '");' . "\n";
+	} ?>
+	
+	panel.find('button').click(function(e){
+		e.preventDefault();
+		var btn = $(this).attr('disabled', true).addClass('loading');
+		report.html('');
+		var i = 0;
+		var run = function() {
+			if (i >= tests.length) {
+				btn.attr('disabled', false).removeClass('loading');
+				return;
+			}
+			if (tests[i].isActive()) {
+				tests[i].run(run);i++;
+			} else {
+				i++;run();
+			}
+		};
+		run();
+	});
+});
+</script>

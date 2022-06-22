@@ -1,0 +1,103 @@
+<?php echo $this->h1(); ?>
+<div id="dashboard">
+	<?php foreach ([] as $portal) {
+		$monitorLog = Db::query('SELECT monitor_url.*'
+			. ' FROM monitor_url'
+			. ' WHERE portal_id=' . $portal['id'] . ' AND test_flag=0'
+			. ' ORDER BY url ASC')->fetchAll();
+		?>
+		<div class="card" data-id="<?= $portal['id']; ?>">
+			<div class="card-title"><h2><?= $portal['name']; ?>
+					<a href="https://www.<?= $portal['domain']; ?>" target="_blank">preview</a></h2></div>
+			<div class="card-body status-items">
+				<div class="status-item monitor-status">
+					<div class="title">Http status</div>
+					<div class="inner">
+						<?php foreach ($monitorLog as $log) { ?>
+							<div class="">
+							<?php echo '<span class="status ' . $log['status'] . '">' . strtoupper($log['status']) . '</span>',
+								'<span class="date">' . Format::formatDate($log['updated'], 'datetime') . '</span>',
+								'<a href="' . $log['url'] . '" target="_blank" class="url">' . $log['url'] . '</a>'; ?>
+							</div><?php } ?>
+					</div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">Cron задания</div>
+					<div class="inner"></div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">Cron log</div>
+					<div class="inner"></div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">Backup status</div>
+					<div class="inner"></div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">robots.txt</div>
+					<div class="inner"></div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">Sitemap status</div>
+					<div class="inner"></div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">SMS & Emails</div>
+					<div class="inner"></div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">Api status</div>
+					<div class="inner"></div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">Error log</div>
+					<div class="inner"></div>
+				</div>
+				<div class="status-item cron-status">
+					<div class="title">Configs</div>
+					<div class="inner"></div>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+	<!--<div class="card card-cronjobs">
+		<div class="card-title"><h2>Cron jobs</h2></div>
+		<div class="card-body">
+			<div class="task">
+				<div class="name">Каждыйдень в 00:00</div>
+				<ul>
+					<li>Обновление индексов мастеров для случайной сортировки в выдаче (master:update-master-index)</li>
+					<li>Уведомление мастеров если нет фото проектов или нет аватара (master:send-master-alerts)</li>
+				</ul>
+			</div>
+			<div class="task">
+				<div class="name">Каждую неделю в воскресенье в 01:00</div>
+				<ul>
+					<li>Отчет для администратора о мастерах без проектов (admin:master-without-projects)</li>
+					<li>Резервное копирование и отправка в dropbox (dump.sh)</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="card card-cronjobs">
+		<div class="card-title"><h2>Документация</h2></div>
+		<div class="card-body">
+			<a href="http://docs.fixinglist.com/app/" target="_blank">Мобильное приложение</a><br/>
+			<a href="http://docs.fixinglist.com/kartmon/" target="_blank">Kartmon api</a><br/>
+			<code>
+				admin
+				T+c:+PTkgQ;JkLh
+			</code>
+		</div>
+	</div>-->
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		const dashboard = $('#dashboard');
+		const sites = <?= json_encode($this->portals)?>;
+		for (let i = 0; i < sites.length; i++) {
+			const site = new app.dashboard.Site(sites[i]);
+			dashboard.append(site.getEl());
+		}
+	});
+</script>

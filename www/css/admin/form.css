@@ -1,0 +1,39 @@
+
+textarea.field-htmleditor{display:none;}
+
+div.form-field{margin-bottom:16px;}
+div.form-field:last-child{margin-bottom:0;}
+div.form-field .form-element-hint{display:inline-block;font-size:12px;font-style:italic;color:var(--text);margin-left:9px;}
+div.form-field>label.form-element-label{padding:7px 0;display:inline-block;width:120px;line-height:18px;}
+div.form-field input[type="password"],
+div.form-field input[type="email"],
+div.form-field input[type="tel"],
+div.form-field input[type="text"]{height:32px;width:240px;}
+div.form-field select{height:32px;width:240px;}
+div.form-field textarea{width:240px;line-height:16px;height:52px;}
+
+fieldset{border:1px solid var(--border);padding:16px;}
+
+div.field-invalid input,
+div.field-invalid select,
+div.field-invalid textarea{border-color:var(--error);}
+
+div.plugin-button-period>label.form-element-label{text-decoration:underline;}
+div.plugin-button-period>label.form-element-label:hover{text-decoration:none;}
+div.field-interval div.interval-elements{display:inline-block;}
+div.field-interval div.interval-elements label{padding:4px 0;display:inline-block;line-height:18px;margin-right:4px;}
+div.field-interval div.interval-elements label.date-to{margin-left:4px;}
+div.field-created input[type="text"]{width:103px;text-align:right;}
+
+div.multiselect{line-height:18px;}
+div.multiselect div.column{display:inline-block;vertical-align:top;margin-right:16px;}
+div.multiselect input{margin:2px 4px 0 0;float:left;}
+
+.fields-justify label.form-element-label{position:absolute;left:0;}
+.fields-justify div.form-field{padding-left:128px;position:relative;}
+.fields-justify div.form-field input[type="text"],
+.fields-justify textarea{width:100%;}
+
+div.field-xml_priority select{width:60px;}
+
+.form-mailtemplate textarea{height:500px;}

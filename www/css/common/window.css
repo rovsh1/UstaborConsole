@@ -1,0 +1,31 @@
+div.window{position:absolute;top:-1000px;left:-1000px;display:none;z-index:99;background:#fff;box-shadow:rgba(0, 0, 0, 0.247059) 0px 3px 8px 0px;color:#000;min-width:320px;max-width:460px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+div.window div.window-title{position:relative;line-height:22px;padding:16px 48px;font-size:18px;line-height:24px;}
+div.window div.window-body{padding:16px 48px 32px 48px;position:relative;min-height:64px;}
+div.window div.btn-close{position:absolute;top:16px;right:16px;z-index:11;}
+div.window div.btn-close:before{}
+.window-buttons{padding:0 48px 32px 48px;text-align:center;}
+.window-buttons button{height:32px;margin-right:9px;}
+.window-buttons button:last-child{margin-right:0;}
+
+div.window-form{width:100%;max-width:420px;}
+div.window-form div.window-title{text-align:center;}
+div.window-form form{margin:0 auto;}
+div.window-form div.form-field{margin-bottom:16px;}
+div.window-form div.form-field:last-child{margin-bottom:0;}
+div.window-form div.form-field input[type="text"],
+div.window-form div.form-field input[type="password"],
+div.window-form div.form-field input[type="email"],
+div.window-form div.form-field select{width:100%;height:36px;padding:0 16px;}
+div.window-form div.form-body{}
+div.window-form div.form-buttons{margin-top:16px;text-align:center;}
+div.window-form div.form-buttons button{height:36px;min-width:96px;width:100%;}
+div.window-form span.error{display:block;margin-top:3px;font-size:12px;}
+div.window-form .form-element-hint{text-align:right;margin-top:9px;font-size:12px;}
+div.window-form div.form-header{line-height:20px;padding-bottom:16px;}
+div.window-form div.form-footer{text-align:center;color:var(--text);margin-top:32px;}
+div.window-form div.social{margin-top:16px;text-align:center;}
+div.window-form div.social div.t{position:relative;line-height:16px;margin-bottom:16px;}
+div.window-form div.social div.t i{background:#ffffff;display:inline-block;padding:0 9px;font-style:normal;position:relative;z-index:1;}
+div.window-form div.social div.t:before{content:'';display:block;position:absolute;left:0;top:50%;width:100%;height:1px;background:var(--border);}
+
+div.shadow{position:fixed;top:0;left:0;width:100%;height:100%;z-index:30;background:rgba(0, 0, 0, 0.701961);display:none;overflow:auto;}

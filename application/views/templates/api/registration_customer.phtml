@@ -1,0 +1,47 @@
+<div class="head"><span class="method">POST</span><span class="url">/registration/customer/</span> — Регистрация пользователя.</div>
+<div class="params">
+	<h3>Параметры (стандартные по логину и паролю)</h3>
+	<table>
+		<tr>
+			<th>email</th>
+			<td>Email пользователя.<div class="param-opts"><b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>phone</th>
+			<td>Телефон пользователя.<blockquote>Один из параметров email или телефон обязательно должен быть заполнен.</blockquote><br /><div class="param-opts"><b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>password</th>
+			<td>Пароль пользователя.<div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+	</table>
+	<h3>Параметры (регистрация через соц сети)</h3>
+	<table>
+		<tr>
+			<th>provider</th>
+			<td>Идентификатор социальной сети.<blockquote>На данный момент доступны соц сети facebook и googleplus.</blockquote>
+				<br /><div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>token</th>
+			<td>Код доступа соц сети.<div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+	</table>
+</div>
+<div class="result">
+	<h3>Ответ <span>булево</span></h3>
+	<blockquote>Всега возвращает истину, в случае неудачной регистрации вернет ошибку.</blockquote>
+</div>
+<div class="erors">
+	<h3>Ошибки</h3>
+	<table>
+		<tr>
+			<th>Provider invalid</th>
+			<td>Недопустимый параметр provider</td>
+		</tr>
+		<tr>
+			<th>Token undefined</th>
+			<td>Недопустимый параметр token</td>
+		</tr>
+	</table>
+</div>

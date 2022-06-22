@@ -1,0 +1,36 @@
+<?php echo $this->h1(); ?>
+<div class="card">
+	<div class="card-body">
+		<?php
+		$ip = $this->ip;
+		$data = [];//$user->getData();
+		echo Format::formatParams($data, [
+			'status_param' => 'Статус',
+			'presentation' => ['label' => 'Name'],
+			'name' => 'Имя',
+			'surname' => 'Фамилия',
+			'patronymic' => 'Отчество',
+			'email' => ['type' => 'email', 'label' => 'Email'],
+			'phone' => ['type' => 'phone', 'label' => lang('Phone')],
+			'gender' => ['label' => 'Пол', 'type' => 'enum', 'enum' => 'USER_GENDER'],
+			'birthday' => ['label' => 'Дата рождения', 'type' => 'date'],
+			'created' => ['label' => 'Создан', 'type' => 'date', 'format' => 'datetime'],
+			'last_activity' => ['label' => 'Был тут', 'type' => 'date', 'format' => 'datetime']
+		]);
+		?>
+	</div>
+</div>
+<div class="card" id="banlist-ip-auth">
+	<div class="card-title"><h2>{{lang:User auth}}</h2></div>
+	<div class="card-body"></div>
+</div>
+<div class="card" id="banlist-ip-log">
+	<div class="card-title"><h2>{{lang:Banlist log}}</h2></div>
+	<div class="card-body"></div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#banlist-ip-log').cardgrid({url: '<?php echo $this->url('./ipbanlog/' . $this->ip. '/'); ?>'});
+	$('#banlist-ip-auth').cardgrid({url: '<?php echo $this->url('./ipauthlog/' . $this->ip . '/'); ?>'});
+});
+</script>

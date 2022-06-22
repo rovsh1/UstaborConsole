@@ -1,0 +1,15 @@
+<?php
+use Api\Model\Portal;
+
+$portalApi = Api::factory('Portal');
+foreach ($portalApi->select() as $portal) { ?>
+<div class="item">
+	<div class="domains">
+		<?php foreach (Portal::$subdomains as $sub) { ?>
+		<div class="subdomain" data-domain="<?php echo $sub . '.' . $portal['domain']; ?>">
+			<span class="name"><?php echo $sub . '.' . $portal['domain']; ?></span>
+		</div>
+		<?php } ?>
+	</div>
+</div>
+<?php } ?>

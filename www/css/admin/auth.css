@@ -1,0 +1,6 @@
+body.page-auth main{width:280px;position:absolute;top:50%;left:50%;margin-left:-160px;transform:translateY(-50%);min-height:0;padding:16px 0 0 0;}
+body.page-auth div.logo{width:48px;height:48px;background-image:url("/images/bird.svg");background-size:48px 48px;margin:0 auto;}
+body.page-auth main div.form-field{margin-bottom:9px;}
+body.page-auth div.form-field input[type="text"],
+body.page-auth div.form-field input[type="password"],
+body.page-auth button{width:100%;height:34px;}

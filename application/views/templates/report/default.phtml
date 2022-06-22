@@ -1,0 +1,31 @@
+<form method="post" class="report-form" id="report-form">
+	<?php echo $this->h1(); ?>
+	<div class="card card-tabs">
+		<div class="card-title" id="form-title">
+			<ul class="tabs"><li data-tab="tab-form">{{lang:Main}}</li><li data-tab="tab-response">{{lang:Response}}</li></ul>
+		</div>
+		<div class="card-body report-form">
+			<div class="tab" id="tab-form">
+				<?php echo $this->form->report(), $this->form->render('portal_id', 'created', 'fileparams'); ?>
+				<hr />
+				<?php echo $this->form->render(); ?>
+				<div class="form-buttons">
+					<button type="submit" class="btn-submit">{{lang:button_export}}</button>
+				</div>
+			</div>
+			<div class="tab" id="tab-response"></div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#report-form').tabs();
+	$('div.field-interval').buttonPeriod({value: 'prevmonth'});
+	const form = new ReportForm({
+		formEl: '#report-form',
+		responseEl: '#tab-response',
+		tabsEl: 'form-title',
+		step: <?=json_encode($this->step)?>
+	});
+});
+</script>

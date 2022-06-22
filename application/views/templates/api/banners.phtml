@@ -1,0 +1,112 @@
+<div class="head"><span class="method">GET</span><span class="url">/banners/</span> — Список рекламных баннеров.</div>
+<h3>Общие параметры</h3>
+<ul>
+	<li><span class="l">Параметры списка</span></li>
+	<li><span class="l">Сайт</span></li>
+	<li><span class="l">Страна</span></li>
+</ul>
+<div class="params">
+	<h3>Параметры</h3>
+	<table>
+		<tr>
+			<th>category_id</th>
+			<td>Идентификатор категории.<div class="param-opts">целочисленный, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>master_id</th>
+			<td>Идентификатор мастера.<div class="param-opts">целочисленный, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>page_id</th>
+			<td>Идентификатор страницы.<div class="param-opts">целочисленный, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>country_id</th>
+			<td>
+				Пароль пользователя.<div class="param-opts">целочисленный, <b>опционально</b></div>
+			</td>
+		</tr>
+		<tr>
+			<th>project_id</th>
+			<td>Идентификатор проекта.<div class="param-opts">целочисленный, <b>опционально</b></div>
+			</td>
+		</tr>
+		<tr>
+			<th>session</th>
+			<td>Массив идентификаторов, которые необходимо исключить из ответа.<div class="param-opts">массив, <b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>dimension</th>
+			<td>Размер изображения, вернет максимально приближенное к этому значению изображение баннера<div class="param-opts"><b>строка [ширина]х[высота] пикселей</b></div></td>
+		</tr>
+	</table>
+</div>
+<div class="result">
+	<h3>Ответ <span>[массив]</span></h3>
+	<div class="params">
+		<table>
+			<tr>
+				<th>id</th>
+				<td>Идентификатор<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>country_id</th>
+				<td>Идентификатор страны<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>advertiser_id</th>
+				<td>Идентификатор рекламодателя<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>type</th>
+				<td>Тип банера<div class="param-opts">1 - на весь экран, 2 - фоновый, 3 - на странице</div></td>
+			</tr>
+			<tr>
+				<th>name</th>
+				<td>Наименование</td>
+			</tr>
+			<tr>
+				<th>image</th>
+				<td>Изображение<div class="param-opts">картинка</div></td>
+			</tr>
+			<tr>
+				<th>url</th>
+				<td>Адрес перехода</td>
+			</tr>
+			<tr>
+				<th>view_count</th>
+				<td>Максимальное количество показов<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>view_time</th>
+				<td>Максимальное время показа<div class="param-opts">целочисленный, в секундах</div></td>
+			</tr>
+			<tr>
+				<th>counter</th>
+				<td>Счетчик показов<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>counter_unique</th>
+				<td>Счетчик уникальных показов<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>counter_click</th>
+				<td>Счетчик переходов<div class="param-opts">целочисленный</div></td>
+			</tr>
+			<tr>
+				<th>status</th>
+				<td>Статус баннера<div class="param-opts">1 - включен, 0 - выключен</div></td>
+			</tr>
+			<tr>
+				<th>created</th>
+				<td>Дата создания<div class="param-opts">дата и время</div></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="erors">
+	<h3>Ошибки</h3>
+	<p>В ходе выполнения могут произойти общие ошибки.</p>
+</div>
+
+

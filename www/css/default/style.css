@@ -1,0 +1,63 @@
+
+body .ui-tooltip{font-size:12px;padding:5px 9px;line-height:1.3em;border-radius:3px;border:1px solid var(--border);border-width:1px !important;-webkit-box-shadow:0 10px 20px -5px rgba(0,0,0,.4);box-shadow:0 10px 20px -5px rgba(0,0,0,.4);}
+
+i.tooltip{border:1px solid var(--border);border-radius:2px;display:inline-block;font-style:normal;padding:0 4px;line-height:16px;font-size:11px;margin-left:5px;}
+
+.menu{position:absolute;background:#ffffff;z-index:20;text-align:left;border-radius:3px;box-shadow:var(--shadow-popup);overflow:hidden;}
+.menu a{display:block;font-weight:normal;padding:9px 16px;line-height:20px;white-space:nowrap;}
+
+nav.menu-icon{padding:9px 0;}
+nav.menu-icon a{display:block;font-weight:normal;padding:9px 32px 9px 60px;line-height:20px;white-space:nowrap;color:var(--text);background-size:16px 16px;background-repeat:no-repeat;background-position:32px 50%;transition:color 300ms;}
+nav.menu-icon hr{border:none;background:var(--border);height:1px;margin:9px 32px 9px 60px;}
+nav.menu-icon a:hover{color:var(--text-hover);}
+nav.menu-icon a.settings{background-image:url("/images/ui/settings.svg");}
+nav.menu-icon a.notifications{background-image:url("/images/ui/notification.svg");}
+nav.menu-icon a.logout{background-image:url("/images/ui/logout.svg");}
+nav.menu-icon a.delete{background-image:url("/images/ui/delete.svg");}
+nav.menu-icon a.complain{background-image:url("/images/ui/warning.svg");}
+nav.menu-icon a.archive{background-image:url("/images/ui/inbox.svg");}
+nav.menu-icon a.rate{background-image:url("/images/ui/star.svg");}
+nav.menu-icon a.profile{background-image:url("/images/ui/profile.svg");}
+nav.menu-icon a.response{background-image:url("/images/ui/success.svg");}
+
+div.menu-profile{font-size:12px;background:#ffffff;z-index:100;position:absolute;box-shadow:var(--shadow-popup);border-radius:3px;overflow:hidden;}
+div.menu-profile div.head{background:var(--background-head);color:#ffffff;padding:16px 32px;}
+div.menu-profile div.head div.inner{position:relative;padding-left:56px;min-height:40px;}
+div.menu-profile div.head div.user-avatar{position:absolute;top:0;left:0;cursor:pointer;}
+
+div.user-avatar{position:relative;width:40px;height:40px;}
+div.user-avatar.loading{min-height:40px;}
+div.user-avatar.loading:before{background-size:24px 24px;}
+div.user-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+div.user-avatar input{position:absolute;opacity:0;left:0;top:0;width:100%;height:100%;z-index:1;cursor:pointer;}
+
+header div.menu-profile{top:100%;right:0;width:280px;margin-top:9px;}
+header div.header-logo div.btn-menu{position:absolute;top:4px;right:0;height:32px;width:32px;padding:0 7px;cursor:pointer;}
+header div.header-logo div.btn-menu div{width:18px;height:2px;background-color:var(--default);position:absolute;}
+header div.header-logo div.btn-menu:hover div{background-color:var(--link);}
+header div.header-logo div.btn-menu div:nth-child(1){top:9px;}
+header div.header-logo div.btn-menu div:nth-child(2){top:15px;}
+header div.header-logo div.btn-menu div:nth-child(3){top:21px;}
+header div.header-logo div.menu{display:none;}
+
+div.categories-list.editable dd{cursor:pointer;}
+div.categories-list.editable dd:hover{color:var(--submit);}
+div.categories-list dl{display:inline-block;vertical-align:top;margin-right:4%;width:48%;font-size:12px;margin-bottom:16px;}
+div.categories-list dl:nth-child(even){margin-right:0;}
+div.categories-list dt{padding:4px 0;font-weight:bold;color:var(--text);}
+div.categories-list dd{padding:4px 16px;border-radius:3px;margin-top:5px;}
+div.categories-list dd.selected{background:var(--submit);color:#ffffff !important;}
+
+.user-card div.head{position:relative;padding-left:56px;line-height:18px;}
+.user-card div.head div.user-avatar{position:absolute;left:0;top:0;}
+.user-card div.head div.time{font-size:12px;color:var(--text);margin-top:4px;}
+.user-card div.body{margin-top:32px;line-height:20px;}
+.user-card div.body div.param div.n{display:inline-block;color:var(--text);}
+.user-card div.body div.param div.v{float:right;}
+
+@media only screen and (max-width:600px) {
+	main{padding-bottom:84px;}
+	footer{margin-top:-84px;}
+	footer div.cols-row>*{width:50%;}
+	footer div.cols-row>nav{display:none;}
+}

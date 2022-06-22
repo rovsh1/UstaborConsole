@@ -1,0 +1,28 @@
+
+
+form.grid-form{margin-bottom:16px;}
+form.grid-form div.form-field{display:inline-block;vertical-align:top;position:relative;margin-right:9px;}
+form.grid-form div.form-field label{position:absolute;font-size:10px;left:5px;top:-5px;line-height:10px;padding:0 4px;width:auto;background:#ffffff;border-radius:3px;}
+form.grid-form div.form-field select{width:160px;}
+form.grid-form button{height:26px;}
+
+table.table-grid{width:100%;}
+table.table-grid th,
+table.table-grid td{padding:6px 16px;line-height:16px;}
+table.table-grid th{text-align:left;white-space:nowrap;}
+table.table-grid tbody tr:nth-child(odd){background:var(--background);}
+table.table-grid tbody tr:hover{background:var(--background-alt);}
+table.table-grid .column-edit{width:32px;padding-right:0;}
+table.table-grid a.btn-edit{display:none;width:16px;height:16px;background:url("/images/ui/edit.svg") 50% 50% no-repeat;background-size:12px 12px;vertical-align:top;}
+table.table-grid tr:hover a.btn-edit{display:inline-block;}
+table.table-grid tr a.btn-edit:hover{border-bottom:1px solid var(--text);}
+table.table-grid th div.column-inner{position:relative;}
+table.table-grid div.grid-sorted-arrow{	border-color:#777 transparent;border-style:solid;height:0;width:0;position:absolute;margin-top:-2px;right:0px;top:50%;}
+table.table-grid .column-sorted-desc div.grid-sorted-arrow{border-width: 0px 4px 4px 4px;}
+table.table-grid .column-sorted-asc div.grid-sorted-arrow{border-width: 4px 4px 0 4px;}
+
+.column-number{white-space:nowrap;}
+
+table.table-params{line-height:18px;}
+table.table-params th{text-align:left;padding-right:16px;padding-bottom:9px;}
+table.table-params td{padding-bottom:9px;}

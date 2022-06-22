@@ -1,0 +1,59 @@
+<div class="head"><span class="method">GET</span><span class="url">/advertiser/<b>ID</b>/</span> — Данные рекламодателя.</div>
+<div class="params">
+	<h3>Параметры</h3>
+	<table>
+		<tr>
+			<th>ID</th>
+			<td>Идентификатор рекламодателя.<div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+	</table>
+</div>
+<div class="result">
+	<h3>Ответ <span>{объект}</span></h3>
+	<div class="params">
+		<table>
+			<tr>
+				<th>language</th>
+				<td>Язык рекламодателя</td>
+			</tr>
+			<tr>
+				<th>presentation</th>
+				<td>Полное наименование.</td>
+			</tr>
+			<tr>
+				<th>url</th>
+				<td>Ссылка на сайт компании.</td>
+			</tr>
+			<tr>
+				<th>phone</th>
+				<td>Телефон.</td>
+			</tr>
+			<tr>
+				<th>about_label</th>
+				<td>Заголовок описание (например "О копании").</td>
+			</tr>
+			<tr>
+				<th>about</th>
+				<td>Описание.</td>
+			</tr>
+			<tr>
+				<th>image</th>
+				<td>Логотип.<div class="param-opts">картинка</div></td>
+			</tr>
+			<tr>
+				<th>social</th>
+				<td>Массив ссылок на социальные сети рекламы. Поля элементов массива:<ul>
+					<li><span class="l">name - Наименование в соответствии с выбранным языком</span></li>
+					<li><span class="l">url - Ссылка</span></li>
+					<li><span class="l">image - Иконка социальной сети</span></li>
+				</ul><div class="param-opts">массив</div></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="erors">
+	<h3>Ошибки</h3>
+	<p>В ходе выполнения могут произойти общие ошибки.</p>
+</div>
+
+

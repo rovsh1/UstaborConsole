@@ -1,0 +1,180 @@
+<?php
+$user = $this->authUser;
+
+echo $this->page->doctype(); ?>
+<html>
+<?php
+$pageHead = $this->page->getHead();
+echo $pageHead->getHtml('async');
+?>
+<body class="page-apidoc">
+	<header>
+		<div class="header-wrap">
+			<a href="<?php echo $this->url(''); ?>" class="logo"><?php echo LOGO; ?></a>
+			<?php //echo $this->page->getMenu('breadcrumbs')->render(); ?>
+			<div class="user-nav">
+				<div class="btn" id="btn-user-logo">
+					<div class="user-avatar"><?php echo user_avatar($user->image); ?></div>
+				</div>
+				<div class="menu-profile" id="user-menu"></div>
+			</div>
+		</div>
+	</header>
+	<main>
+		<?php
+		$actions = array(
+			
+			'enums' => 'Перечисления',
+			'login' => 'Логин пользователя',
+			'logout' => 'Logout пользователя',
+			'registration_customer' => 'Регистрация пользователя',
+			'registration_master' => 'Регистрация мастера',
+			'registration_confirm' => 'Подтверждение регистрации',
+			
+			'profile' => 'Мой профиль',
+			'user_edit' => 'Изменить данные',
+			'user_password' => 'Сменить пароль',
+			'user_order' => 'Отправить заявку',
+			
+			'favorite_add' => 'Добавить в избранное',
+			'favorite_remove' => 'Удалить из избранного',
+			'masters' => 'Список мастеров',
+			'vendor_contact' => 'Контакт мастера',
+			'vendor_remove' => 'Удалить мастера',
+			
+			'project_edit' => 'Редактировать проект',
+			'project_remove' => 'Удалить проект',
+			'master_callback' => 'Обратный звонок',
+			
+			'price_categories' => 'Категории',
+			'price_category' => 'Страница категории',
+			
+			'projects' => 'Список проектов',
+			'project_view' => 'Данные проекта',
+			'vendor_view' => 'Данные мастера',
+			'banners' => 'Баннеры',
+			'advertiser' => 'Рекламодатель',
+			
+			'categories' => 'Справочник категорий',
+			'category_tags' => 'Теги категорий',
+			'countries' => 'Справочник стран',
+			'cities' => 'Справочник городов',
+			'districts' => 'Справочник районов',
+			'experiences' => 'Справочник опыт работы',
+			'services' => 'Справочник сервисов'
+		);
+		$fn = function() use ($actions) {
+			foreach (func_get_args() as $arg) {
+				echo '<a href="#' . $arg . '">' . $actions[$arg] . '</a>';
+			}
+		};
+		?>
+		<div id="mainmenu" class="mainmenu">
+			<div class="menu-inner">
+				
+			<div class="item">
+				<div class="label"><i class="fa fa-caret-down"></i>Общие сведения</div>
+				<nav>
+					<a href="#main">Синтаксис запроса</a>
+					<a href="#main_params">Общие параметры</a>
+					<a href="#main_response">Формат ответа</a>
+					<a href="#main_auth">Авторизация пользователя</a>
+					<a href="#enums">Перечисления</a>
+				</nav>
+			</div>
+			<div class="item">
+				<div class="label"><i class="fa fa-caret-down"></i>Авторизация</div>
+				<nav><?php $fn('login', 'logout', 'registration_customer', 'registration_master', 'registration_confirm'); ?></nav>
+			</div>
+			<div class="item">
+				<div class="label"><i class="fa fa-caret-down"></i>Личный кабинет</div>
+				<nav><?php $fn('profile', 'user_edit', 'user_password'); ?></nav>
+			</div>
+			<div class="item">
+				<div class="label"><i class="fa fa-caret-down"></i>Пользователь</div>
+				<nav><?php $fn('favorite_add', 'favorite_remove', 'masters', 'vendor_contact', 'vendor_remove', 'user_order'); ?></nav>
+			</div>
+			<div class="item">
+				<div class="label"><i class="fa fa-caret-down"></i>Мастер</div>
+				<nav><?php $fn('project_edit', 'project_remove', 'master_callback'); ?></nav>
+			</div>
+			<div class="item">
+				<div class="label"><i class="fa fa-caret-down"></i>Цены</div>
+				<nav><?php $fn('price_categories', 'price_category'); ?></nav>
+			</div>
+			<div class="item">
+				<div class="label"><i class="fa fa-caret-down"></i>Общие методы</div>
+				<nav><?php $fn('projects', 'project_view', 'vendor_view', 'banners', 'advertiser'); ?></nav>
+			</div>
+			<div class="item">
+				<div class="label"><i class="fa fa-caret-down"></i>Справочники</div>
+				<nav><?php $fn('categories', 'category_tags', 'countries', 'cities', 'districts', 'experiences', 'services'); ?></nav>
+			</div>
+			</div>
+		</div>
+		<div id="content" class="content<?php echo $this->contentClass ? ' ' . $this->contentClass : ''; ?>">
+			<div class="apidoc" id="apidoc">
+				<?php
+				$this->renderTemplate('main');
+				foreach ($actions as $k => $l) {
+					echo '<div class="block action" id="' . $k . '"><h2 id="h-' . $k . '">' . $l . '</h2><div class="block-inner">';
+					if (file_exists(APPLICATION_PATH . '/views/templates/api/' . $k . '.phtml'))
+					$this->renderTemplate($k);
+					echo '</div></div>';
+				}
+				?>
+			</div>
+		</div>
+	</main>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var blocks = $('#apidoc div.block'),
+		current, dy = 70;
+	$(window).scroll(function(){
+		var y = $(window).scrollTop(),
+			h = $(window).height() / 2,
+			block = blocks[0];
+		blocks.each(function(){
+			var p = $(this).offset();
+			if (p.top === y) {
+				block = this;
+				return false;
+			} else if (p.top >= y || p.top + $(this).outerHeight(false) >= y) {
+				block = this;
+				return false;
+			}
+		});
+		if (current !== block) {
+			current = block;
+			$('#mainmenu div.expanded').removeClass('expanded')
+			$('#mainmenu a.current').removeClass('current');
+			$('#mainmenu a').each(function(){
+				if ($(this).attr('href') === '#' + block.id) {
+					$(this).addClass('current').parent().parent().addClass('expanded');
+					return false;
+				}
+			});
+		}
+	}).scroll();
+});
+</script>
+
+
+</div>
+	</div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#mainmenu div.label').click(function(){
+			$(this).parent().toggleClass('expanded');
+		});
+		$(window).scroll(function(){
+			var y = $(this).scrollTop();
+			$('#mainmenu').css('padding-top', (y > 50 ? 0 : 50 - y));
+		});
+	});
+	</script>
+	<?php echo $pageHead->getHtml('footer'); ?>
+</body>
+</html>

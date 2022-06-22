@@ -1,0 +1,30 @@
+.icon{background-position:50% 50%;background-repeat:no-repeat;background-size:16px 16px;}
+
+.loading{position:relative;min-height:60px;}
+button.loading{min-height:0;}
+.loading:after{content:'';display:block;text-align:center;position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(255, 255, 255, .4) url("/images/preload.svg") 50% 50% no-repeat;background-size:48px 48px;}
+button.loading:after{background-size:32px 32px;}
+body.loading:after{position:fixed;}
+
+.btn-close{width:24px;height:24px;cursor:pointer;opacity:.8;}
+.btn-close:hover{opacity:1;}
+.btn-close:before,
+.btn-close:after{content:'';display:block;position:absolute;height:1px;background:#000000;top:50%;width:12px;left:5px;}
+.btn-close:before{transform:rotate(-45deg);}
+.btn-close:after{transform:rotate(45deg);}
+.btn-submit{border-radius:3px;background:var(--submit);color:#ffffff;border:none;padding:0 16px;transition:background 0.3s ease;}
+.btn-cancel{border-radius:3px;background:var(--cancel);color:#ffffff;border:none;padding:0 16px;}
+.btn-delete{border-radius:3px;background:var(--cancel);color:#ffffff;border:none;padding:0 16px;transition:background 0.3s ease;}
+.btn-submit:hover,
+.btn-cancel:hover,
+.btn-delete:hover{box-shadow:var(--shadow-hover);}
+
+nav.menu-social{}
+nav.menu-social a{display:inline-block;vertical-align:top;width:32px;height:32px;margin-right:9px;background-size:contain;opacity:.8;}
+nav.menu-social a:last-child{margin-right:0;}
+nav.menu-social a:hover{opacity:1;}
+nav.menu-social a.vkontakte{background-image:url("/images/social/vkontakte.svg");}
+nav.menu-social a.facebook{background-image:url("/images/social/facebook.svg");}
+nav.menu-social a.yandex{background-image:url("/images/social/yandex.svg");}
+nav.menu-social a.google{background-image:url("/images/social/google.svg");}
+nav.menu-social a.odnoklassniki{background-image:url("/images/social/odnoklassniki.svg");}

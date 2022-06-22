@@ -1,0 +1,90 @@
+<div class="head"><span class="method">GET</span><span class="url">/vendor/<b>ID</b>/</span> — Данные проекта.</div>
+<div class="params">
+	<h3>Параметры</h3>
+	<table>
+		<tr>
+			<th>ID</th>
+			<td>Идентификатор мастера.<div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+	</table>
+</div>
+<div class="result">
+	<h3>Ответ <span>{объект}</span></h3>
+	<div class="params">
+		<table>
+			<tr>
+				<th>id</th>
+				<td>Идентификатор пользователя.<div class="param-opts">целое число</div></td>
+			</tr>
+			<tr>
+				<th>presentation</th>
+				<td>Полное имя пользователя</td>
+			</tr>
+			<tr>
+				<th>login</th>
+				<td>Логин</td>
+			</tr>
+			<tr>
+				<th>email</th>
+				<td>Адрес электронной почты</td>
+			</tr>
+			<tr>
+				<th>phone</th>
+				<td>Телефон</td>
+			</tr>
+			<tr>
+				<th>about</th>
+				<td>Описание о себе.</td>
+			</tr>
+			<tr>
+				<th>experience</th>
+				<td>Идентификатор опыт работы.<div class="param-opts"><a href="#categories">Справочник опыт работы</a></div></td>
+			</tr>
+			<tr>
+				<th>rating</th>
+				<td>Рейтинг мастера</td>
+			</tr>
+			<tr>
+				<th>image</th>
+				<td>Фото пользователя.<div class="param-opts">картинка</div></td>
+			</tr>
+			<tr>
+				<th>categories</th>
+				<td>Список категорий мастера.<div class="param-opts"><a href="#categories">Справочник категории</a></div></td>
+			</tr>
+			<tr>
+				<th>cities</th>
+				<td>Список городов мастера.<div class="param-opts"><a href="#cities">Справочник городов</a></div></td>
+			</tr>
+			<tr>
+				<th>projects</th>
+				<td>Проекты мастера.<div class="param-opts"><a href="#projects">Проекты</a></div></td>
+			</tr>
+			<tr>
+				<th>badges</th>
+				<td>Список бейджиков мастера. Поля элементов массива:
+					<ul>
+						<li><span class="l">id - идентификатор</span><ul>
+							<li><span class="l">1 - TOP</span></li>
+							<li><span class="l">2 - Одобрено</span></li>
+							<li><span class="l">3 - Рекомендовано</span></li>
+							<li><span class="l">4 - Ответственность</span></li>
+						</ul></li>
+						<li><span class="l">key - символьный код</span></li>
+						<li><span class="l">name - Наименование в соответствии с заданым языком</span></li>
+					</ul>
+					<div class="param-opts">массив</div></td>
+			</tr>
+			<tr>
+				<th>url</th>
+				<td>Адрес проекта в интернет.</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="erors">
+	<h3>Ошибки</h3>
+	<p>В ходе выполнения могут произойти общие ошибки.</p>
+</div>
+
+

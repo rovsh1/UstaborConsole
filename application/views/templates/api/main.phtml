@@ -1,0 +1,125 @@
+<div class="block" id="main">
+	<h2>Синтаксис запроса</h2>
+	<div class="block-inner">
+		<p>Чтобы обратиться к методу API, Вам необходимо выполнить POST или GET запрос такого вида:</p>
+		<blockquote>
+			https://api.ustabor.uz/<b>V</b>/?sid=<b>SITE_ID</b>&cid=<b>COUNTRY_ID</b>&lang=<b>LANGUAGE</b>
+		</blockquote>
+		<br />
+		<p>Он состоит из нескольких частей:</p>
+		<ul>
+			<li><span class="l"><b>V</b> <span class="required">(обязательно)</span> — используемая версия API. Передавать нужно в формате: v<b>{номер версии, напимер 2}</b>. Использование этого параметра применяет некоторые изменения в формате ответа различных методов. На текущий момент актуальная версия API — v2.</li>
+			<li><span class="l"><b>SITE_ID</b> <span class="required">(обязательно)</span> — один из доступных сайтов:</span>
+				<ul>
+					<li><span class="l">1 - Строительные работы</span></li>
+					<li><span class="l">2 - Авто</span></li>
+					<li><span class="l">3 - Техника</span></li>
+					<li><span class="l">4 - Дом быта</span></li>
+					<li><span class="l">5 - Материалы</span></li>
+				</ul>
+			</li>
+			<li><span class="l"><b>COUNTRY_ID</b> <span class="required">(опционально)</span> — идентификатор (или двузначный код) страны, ограничивает выдачу данных, только заданной страной. Для получения списка стран, воспользуйтесь <a href="#countries">соответствующим методом</a>.</span></li>
+			<li><span class="l"><b>LANGUAGE</b> <span class="required">(опционально)</span> — определяет язык, на котором будут возвращаться различные данные. Доступны следующие варианты:</span>
+				<ul>
+					<li><span class="l"><i>ru</i> - русский</span></li>
+					<li><span class="l"><i>en</i> - английский</span></li>
+					<li><span class="l"><i>uz</i> - узбекский</span></li>
+					<li><span class="l"><i>kz</i> - казахский</span></li>
+					<li><span class="l"><i>kg</i> - киргизский</span></li>
+				</ul>
+				<span class="l">Значение по умолчанию: ru</span>
+			</li>
+		</ul>
+		<p>Параметры могут передаваться как методом GET, так и POST.</p>
+		<p>Пример вызова метода <a href="#districts">districts</a>:</p>
+		<blockquote>https://api.ustabor.uz/v2/districts/?sid=1&cid=529&lang=ru&city_id=372&limit=2</blockquote>
+		<br />
+		<p>В ответ на такой запрос Вы получите ответ в формате JSON:</p>
+		<blockquote class="pre">{
+	"date":"20170524T020210",
+	"status":{
+		"code":"ok",
+		"message":""
+	},
+	"result":[
+		{
+			"id":"12",
+			"city_id":"372",
+			"name":"Алмазарский район",
+			"city_name":"Ташкент"
+		},
+		{
+			"id":"5",
+			"city_id":"372",
+			"name":"Бектемирский район",
+			"city_name":"Ташкент"
+		}
+	]
+}</blockquote>
+	</div>
+</div>
+<div class="block" id="main_params">
+	<h2>Общие параметры</h2>
+	<div class="block-inner">
+		<p>Параметры для запросов, в которых возвращается список записей:</p>
+		<ul>
+			<li><span class="l"><b>НАИМЕНОВАНИЕ_ПОЛЯ</b> — Фильтр по данному полю.</span></li>
+			<li><span class="l"><b>max-results</b> — Ограничение количества возвращаемых записей.</span></li>
+			<li><span class="l"><b>start-index</b> — Начальная позиция выдачи.</span></li>
+			<li><span class="l"><b>orderby</b> — Поле для сортировки.</span></li>
+			<li><span class="l"><b>sortorder</b> — Направление сортировки asc или desc.</span></li>
+			<li><span class="l"><b>columns</b> — Возвращаемые поля.</span></li>
+		</ul>
+	</div>
+	<br />
+	<h2>Типы данных</h2>
+	<div class="block-inner">
+		<ul>
+			<li><span class="l"><b>картинка</b> — Передача данных через массив $_FILES.</span></li>
+		</ul>
+	</div>
+</div>
+<div class="block" id="main_response">
+	<h2>Формат ответа</h2>
+	<div class="block-inner">
+		<p>Возможные HTTP коды:</p>
+		<ul>
+			<li><span class="l"><i>200</i> — успешное выполнение операции.</span></li>
+			<li><span class="l"><i>401</i> — требуется авторизация.</span></li>
+			<li><span class="l"><i>403</i> — доступ закрыт.</span></li>
+			<li><span class="l"><i>404</i> — данные не найдены.</span></li>
+			<li><span class="l"><i>500</i> — ошибка сервера, обратитесь к администратору сайта.</span></li>
+		</ul>
+		<br />
+		<p>Общий формат ответа:</p>
+		<blockquote class="pre">{
+	"date":"20170524T020210",
+	"status":{
+		"code":"ok",
+		"message":""
+	},
+	"result":...
+}</blockquote>
+		<br />
+		<p>Описание полей ответа:</p>
+		<ul>
+			<li><span class="l"><b>date</b> — Текущее время сервера.</span></li>
+			<li><span class="l"><b>status</b> — Статус ответа, состоит из 2 полей:</span>
+				<ul>
+					<li><span class="l"><b>code</b> — ok или error.</span></li>
+					<li><span class="l"><b>message</b> — Описание ошибки.</span></li>
+				</ul>
+			</li>
+			<li><span class="l"><b>result</b> — Данные, тип значения зависит от запроса.</span></li>
+		</ul>
+	</div>
+</div>
+<div class="block" id="main_auth">
+	<h2>Авторизация пользователя</h2>
+	<div class="block-inner">
+		<p>Для авторизации пользователя необходимо передавать в каждом запросе специальный заголовок с кодом:</p>
+		<blockquote>Authorization: authCode=<b>КОД_АВТОРИЗАЦИИ</b></blockquote>
+		<br />
+		<p>Для получения кода авторизации воспользуйтесь методом <a href="#login">login</a></p>
+	</div>
+</div>

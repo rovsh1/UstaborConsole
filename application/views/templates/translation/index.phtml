@@ -1,0 +1,219 @@
+<?php echo $this->h1(); ?>
+<div class="page-translation card">
+	<div class="card-body">
+		<div class="search">
+			<input type="text" id="qs_text" value="" placeholder="Быстрый поиск" />
+		</div>
+		<div class="" id="translation-list"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	(function(inputText, list){
+		var languages = <?php
+		$codes = [];
+		foreach (Translation::getLanguages() as $language)
+			$codes[$language->code] = $language->name;
+		echo json_encode($codes);
+		?>;
+
+		function Item(el) {
+			var data = {};
+			
+			if (el === 'new') {
+				data.id = 'new';
+				data.path = 'site';
+			} else {
+				var $tr = $(el).parents('tr');
+				data.id = $tr.data('id');
+				data.path = $tr.data('path');
+				data.name = $tr.find('th a').attr('title');
+				$tr.find('td.language').each(function(){
+					var code = $(this).data('language');
+					data['value_' + code] = $(this).find('input').val();
+				});
+			}
+			
+			this.id = data.id;
+			
+			this.getData = function() { return data; };
+			this.setPath = function(value) { data.path = value; };
+			this.getPath = function() { return data.path; };
+			this.setName = function(value) { data.name = value; };
+			this.getName = function() { return data.name; };
+			this.setValue = function(code, value) { data['value_' + code] = value; };
+			this.getValue = function(code) { return data['value_' + code]; };
+			this.update = function() {
+				if (!el)
+					return;
+				$tr.find('th a')
+					.attr('title', data.name)
+					.html(data.value_ru || data.name);
+				$tr.find('td.language').each(function(){
+					var td = $(this),
+						code = td.data('language'),
+						n = 'value_' + code;
+					td.attr('class', 'language ' + (data[n] ? 'ready' : 'empty'));
+					td.find('input').val(data[n]);
+				});
+			};
+		}
+		var languageWindow = new function() {
+			var W, $textarea, $nav, $pathInput, $nameInput;
+			var tr;
+			var code;
+			
+			var selectLanguage = function(_code) {
+				if (code === _code)
+					return;
+				code = _code;
+				$nav.each(function(){
+					if ($(this).data('code') === code) {
+						$(this).addClass('selected');
+					} else
+						$(this).removeClass('selected');
+				});
+				$textarea
+						.val(tr.getValue(code))
+						.attr('placeholder', languages[code])
+						.focus();
+			};
+			var updateNav = function() {
+				$nav.each(function(){
+					var c = $(this).data('code');
+					$(this).attr('class', tr.getValue(c) ? 'ready' : 'empty');
+					if (c === code)
+						$(this).addClass('selected');
+				});
+			};
+			
+			this.open = function(_tr, _code) {
+				tr = _tr;
+				if (!W) {
+					var html = '';
+					html += '<div class="head">';
+					//html += '<input type="text" class="path" placeholder="Папка" />';
+					html += '<input type="text" class="name" placeholder="Ключ" />';
+					html += '</div>';
+					html += '<ul>';
+					for (var i in languages) {
+						html += '<li data-code="' + i + '"><img src="/images/flag/' + i + '.svg" /></li>';
+					}
+					html += '</ul>';
+					html += '<textarea></textarea>';
+					W = WindowManager.open({
+						cls: 'window-language',
+						title: 'Translation edit',
+						html: html,
+						closeAction: 'hide',
+						buttons: [{
+							text: 'Save',
+							cls: 'btn-submit',
+							handler: function() {
+								if ($nameInput.val() === '') {
+									$nameInput
+										.addClass('field-invalid')
+										.focus();
+									return;
+								}
+								this.setLoading(true);
+								Http.ajax({
+									method: 'post',
+									url: '/translation/edit/' + tr.id + '/',
+									data: tr.getData(),
+									dataType: 'json',
+									success: function(r) {
+										if (tr.id === 'new') {
+											search(true);
+										} else {
+											tr.update();
+											//W.setLoading(false);
+										}
+										W.close();
+									}
+								});
+							}
+						}, 'cancel', {
+							text: 'Delete',
+							cls: 'btn-delete',
+							handler: function() {
+								W.setLoading(true);
+								Http.getJSON('/translation/delete/' + tr.id+ '/', function(){
+									W.close();
+									search(true);
+								});
+							}
+						}]
+					});
+					var el = W.getEl().find('div.window-body');
+					$nameInput = el.find('input.name').change(function(e){
+						tr.setName($nameInput.val());
+						$nameInput.removeClass('field-invalid');
+					});
+					$pathInput = el.find('input.path').change(function(e){
+						tr.setPath($pathInput.val());
+					});
+					$nav = el.find('ul li').click(function(){ selectLanguage($(this).data('code')); });
+					$textarea = el.find('textarea').change(function() {
+						tr.setValue(code, $textarea.val());
+						updateNav();
+					});
+				} else
+					W.show();
+				if (!_code) {
+					for (_code in languages) break;
+				}
+				updateNav();
+				code = null;
+				selectLanguage(_code);
+				$nameInput.val(tr.getName());
+			};
+		};
+		
+		var onimgclick = function(){
+			var tr = new Item(this);
+			languageWindow.open(tr, $(this).parent().data('language'));
+		};
+		var onnameclick = function(e){
+			e.preventDefault();
+			var tr = new Item(this);
+			languageWindow.open(tr);
+		};
+		var q = {};
+		var search = function(force) {
+			if (!force && q.text === inputText.val())
+				return;
+			q = {text: inputText.val()};
+			location.hash = q.text;
+			//loadingMark.show();
+			list.addClass('loading');
+			Http.get('/translation/search/', {quicksearch: q.text, path: q.path}, function(html) {
+				//loadingMark.hide();
+				list.html(html);
+				list.find('img').click(onimgclick);
+				list.find('th a').click(onnameclick);
+				list.removeClass('loading');
+			});
+		};
+
+		var t;
+		inputText.bind(TRIGGER_INPUT_CHANGED, function(e){
+			if (t) clearTimeout(t);
+			t = setTimeout(function(){ search();t = null; }, 400);
+		});
+		
+		(function(hash){
+			if (hash)
+				inputText.val(decodeURIComponent(hash));
+		})(location.hash.replace('#', ''));
+		
+		inputText.change().focus();
+		$('#menu-actions a.add').click(function(e){
+			e.preventDefault();
+			languageWindow.open(new Item('new'));
+		});
+	})($('#qs_text'), $('#translation-list'));
+
+});
+</script>

@@ -1,0 +1,15 @@
+<form method="post" class="" enctype="multipart/form-data">
+	<?php echo $this->h1(); ?>
+	<div class="card">
+		<div class="card-body">
+			<?php echo $this->form->report(), $this->form->render('presentation', 'login'); ?>
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-title"><h2>{{lang:Change password}}</h2></div>
+		<div class="card-body">
+			<?php echo $this->form->render('password'); ?>
+		</div>
+	</div>
+	<?php $this->renderTemplate('default', 'form-buttons'); ?>
+</form>

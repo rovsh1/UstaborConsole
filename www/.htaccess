@@ -1,0 +1,241 @@
+AddDefaultCharset UTF-8
+Options -MultiViews
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+
+	RewriteCond %{HTTP:Authorization} ^(.*)
+	RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+	#robots
+	RewriteCond %{REQUEST_URI} ^/robots\.txt$
+		RewriteRule . /robots.php [NC,L]
+
+	# Убираем повторяющиеся слеши (/) в URL
+	RewriteCond %{REQUEST_URI} ^(.*?)(/{2,})(.*)$ 
+		RewriteRule . %1/%3 [R=301,L]
+	# Убираем повторяющиеся слеши (/) после домена
+	RewriteCond %{THE_REQUEST} ([^\s]*)\/{2,}(\?[^\s]*)?
+		RewriteRule (.*) / [R=301,L]
+
+	# request to lower case
+
+	# Убираем слеши в конце URL для статических файлов (содержит точку)
+	RewriteCond %{REQUEST_URI} \..+$
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} -f
+	RewriteCond %{REQUEST_URI} ^(.+)/$
+	RewriteRule ^(.+)/$ /$1 [R=301,L]     
+
+	# Убираем index, если он есть в конце URL
+	#RewriteCond %{REQUEST_METHOD} =GET
+	RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP
+		RewriteRule ^index\.php$ / [R=301,L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} ^(.*)/index\.php$
+		RewriteRule . %1/ [R=301,L]
+	RewriteCond %{REQUEST_URI} ^(.*)/index/$
+		RewriteRule . %1/ [R=301,L]
+
+	# Добавляем слеш(/), если его нет, и это не файл. 
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} ^(.+[^/])$
+		RewriteRule . %1/ [R=301,L]
+
+	# css, js scripts
+	RewriteCond %{REQUEST_URI} ^/(css|js)/((.+)/)?$
+	RewriteRule (.*) /%1/index.php?v=%3 [L]
+
+	RewriteCond %{REQUEST_URI} ^/file/([a-z0-9]{32})/((.+)/)?$
+	RewriteRule (.*) /file.php?guid=%1&index=%3 [NC,L,QSA] #https://www.fixinglist.com
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^.*$ /index.php [L]
+</IfModule>
+
+<IfModule mod_mime.c>
+	# Audio
+	AddType audio/mp4                      m4a f4a f4b
+	AddType audio/ogg                      oga ogg
+
+	# Видео
+	AddType video/ogg                      ogg ogv
+	AddType video/mp4                      mp4
+	AddType video/webm                     webm
+	AddType video/quicktime                mov
+	AddType video/x-flv                    flv
+
+	# Правильный формат для svg. Необходимо для работы svg шрифтов в iPad Safari
+	# twitter.com/FontSquirrel/status/14855840545
+	AddType     image/svg+xml              svg svgz
+	AddEncoding gzip                       svgz
+
+	# Web fonts
+	AddType application/font-woff                       woff
+	AddType application/vnd.ms-fontobject               eot
+
+	# Browsers usually ignore the font MIME types and sniff the content,
+	# however, Chrome shows a warning if other MIME types are used for the
+	# following fonts.
+	AddType application/x-font-ttf                      ttc ttf
+	AddType font/opentype                               otf
+
+	# JavaScript
+	# Normalize to standard type (it's sniffed in IE anyways):
+	# http://tools.ietf.org/html/rfc4329#section-7.2
+	AddType application/javascript                      js jsonp
+	AddType application/json                            json
+
+	# Другие форматы
+	AddType application/octet-stream                    safariextz
+	AddType application/x-chrome-extension              crx
+	AddType application/x-opera-extension               oex
+	AddType application/x-shockwave-flash               swf
+	AddType application/x-web-app-manifest+json         webapp
+	AddType application/x-xpinstall                     xpi
+	AddType application/xml                             atom rdf rss xml
+	AddType image/webp                                  webp
+	AddType image/x-icon                                ico
+	AddType text/cache-manifest                         appcache manifest
+	AddType text/vtt                                    vtt
+	AddType text/x-component                            htc
+	AddType text/x-vcard                                vcf
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# | ETag removal                                                               |
+# ------------------------------------------------------------------------------
+
+# Since we're sending far-future expires headers (see below), ETags can
+# be removed: http://developer.yahoo.com/performance/rules.html#etags.
+
+# `FileETag None` is not enough for every server.
+<IfModule mod_headers.c>
+	# Поскольку мы не отправляем X-UA-Compatible для браузеров отличных от IE
+	# (чтобы сократить размер заголовка),
+	# Нам нужно дать знать прокси-серверам об измененении контента на основе UA
+	# Кеш-контроль включается только когда включен модуль mod_headers,
+	# так что нам необходимо его здесь объявить
+	Header append Vary User-Agent
+
+	Header unset ETag
+
+	<filesMatch "\.(ico|jpe?g|jpg|png|gif|swf|svg)$">
+		Header set Cache-Control "max-age=31536000, public"
+	</filesMatch>
+	<filesMatch "\.(css)$">
+		Header set Cache-Control "max-age=2628000, public"
+	</filesMatch>
+	<filesMatch "\.(js)$">
+		Header set Cache-Control "max-age=2628000, private"
+	</filesMatch>
+	<filesMatch "\.(x?html?|php)$">
+		#Header set Cache-Control "max-age=600, private, must-revalidate"
+	</filesMatch>
+</IfModule>
+
+FileETag None
+
+# ------------------------------------------------------------------------------
+# | Expires headers (for better cache control)                                 |
+# ------------------------------------------------------------------------------
+
+# The following expires headers are set pretty far in the future. If you don't
+# control versioning with filename-based cache busting, consider lowering the
+# cache time for resources like CSS and JS to something like 1 week.
+
+<IfModule mod_expires.c>
+
+	ExpiresActive on
+	ExpiresDefault                                      "access plus 1 month"
+
+	# CSS
+	ExpiresByType text/css                              "access plus 1 year"
+
+	# Data interchange
+	ExpiresByType application/json                      "access plus 0 seconds"
+	ExpiresByType application/xml                       "access plus 0 seconds"
+	ExpiresByType text/xml                              "access plus 0 seconds"
+
+	# Favicon (cannot be renamed!)
+	ExpiresByType image/x-icon                          "access plus 1 week"
+
+	# HTML components (HTCs)
+	ExpiresByType text/x-component                      "access plus 1 month"
+
+	# HTML
+	ExpiresByType text/html                             "access plus 0 seconds"
+
+	# JavaScript
+	ExpiresByType application/javascript                "access plus 1 year"
+
+	# Manifest files
+	ExpiresByType application/x-web-app-manifest+json   "access plus 0 seconds"
+	ExpiresByType text/cache-manifest                   "access plus 0 seconds"
+
+	# Media
+	ExpiresByType audio/ogg                             "access plus 1 month"
+	ExpiresByType image/gif                             "access plus 1 month"
+	ExpiresByType image/jpeg                            "access plus 1 month"
+	ExpiresByType image/png                             "access plus 1 month"
+	ExpiresByType video/mp4                             "access plus 1 month"
+	ExpiresByType video/ogg                             "access plus 1 month"
+	ExpiresByType video/webm                            "access plus 1 month"
+
+	# Web feeds
+	ExpiresByType application/atom+xml                  "access plus 1 hour"
+	ExpiresByType application/rss+xml                   "access plus 1 hour"
+
+	# Web fonts
+	ExpiresByType application/font-woff                 "access plus 1 month"
+	ExpiresByType application/vnd.ms-fontobject         "access plus 1 month"
+	ExpiresByType application/x-font-ttf                "access plus 1 month"
+	ExpiresByType font/opentype                         "access plus 1 month"
+	ExpiresByType image/svg+xml                         "access plus 1 month"
+
+</IfModule>
+
+<IfModule mod_deflate.c>
+	############################################
+	## enable apache served files compression
+	## http://developer.yahoo.com/performance/rules.html#gzip
+
+	# Insert filter on all content
+	SetOutputFilter DEFLATE
+	# Insert filter on selected content types only
+	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+
+	# Netscape 4.x has some problems...
+	BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+	# Netscape 4.06-4.08 have some more problems
+	BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+	# MSIE masquerades as Netscape, but it is fine
+	BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+	# Don't compress images
+	SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+	# Make sure proxies don't deliver the wrong content
+	Header append Vary User-Agent env=!dont-vary
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# | GZip Compression (for faster page transfers)                               |
+# ------------------------------------------------------------------------------
+
+# GZip Compression
+# compress text, html, javascript, css, xml:
+#
+<IfModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/plain text/html
+	AddOutputFilterByType DEFLATE application/json
+	AddOutputFilterByType DEFLATE text/x-component
+	AddOutputFilterByType DEFLATE text/css
+	AddOutputFilterByType DEFLATE text/xml application/xml application/xhtml+xml application/rss+xml application/atom+xml
+	AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+	AddOutputFilterByType DEFLATE image/x-icon image/svg+xml
+	AddOutputFilterByType DEFLATE application/vnd.ms-fontobject application/x-font-ttf application/font-woff font/opentype
+</IfModule>

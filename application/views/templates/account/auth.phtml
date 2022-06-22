@@ -1,0 +1,19 @@
+<?php echo $this->page->doctype(); ?>
+<html>
+	<?php
+	$pageHead = $this->page->getHead();
+	echo $pageHead->getHtml('async');
+	?>
+	<body class="page-auth">
+		<main>
+			<div class="logo"></div>
+			<div class="content">
+				<form method="post">
+					<?php echo $this->form->report(), $this->form->render(); ?>
+					<button type="submit" class="btn-submit">Войти</button>
+				</form>
+			</div>
+		</main>
+		<?php echo $pageHead->getHtml('footer'); ?>
+	</body>
+</html>

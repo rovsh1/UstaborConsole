@@ -1,0 +1,16 @@
+<div class="paginator">
+	<ul>
+	<?php if ($pages->previous) { ?><li class="prev"><?php echo $this->link($pages->previous, '&larr; Назад'); ?></li><?php }
+	
+	if ($pages->firstPageInRange > 2) echo '<li class="first">', $this->link(1), '</li><li class="dot">...</li>';
+	
+	foreach ($pages->pagesInRange as $page) { ?><li class="page<?php echo ($page == $pages->current ? ' current' : ''); ?>">
+		<?php if ($page != $pages->current) echo $this->link($page);
+			else echo $page; ?>
+	</li><?php }
+	
+	if ($pages->lastPageInRange < $pages->last - 1) echo '<li class="dot">...</li><li class="last">', $this->link($pages->last), '</li>'; 
+	
+	if (isset($pages->next)) { ?><li class="next" title=""><?php echo $this->link($pages->next, 'Вперед &rarr;'); ?></li><?php } ?><li class="count">Всего: <?php echo $this->getCount(); ?></li>
+	</ul>
+</div>

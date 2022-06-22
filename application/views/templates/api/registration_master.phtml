@@ -1,0 +1,46 @@
+<div class="head"><span class="method">POST</span><span class="url">/registration/master/</span> — Регистрация мастера.</div>
+<div class="params">
+	<h3>Параметры</h3>
+	<table>
+		<tr>
+			<th>email</th>
+			<td>Email пользователя.<div class="param-opts"><b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>phone</th>
+			<td>Телефон пользователя.<blockquote>Один из параметров email или телефон обязательно должен быть заполнен.</blockquote><br /><div class="param-opts"><b>опционально</b></div></td>
+		</tr>
+		<tr>
+			<th>password</th>
+			<td>Пароль пользователя.<div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>about</th>
+			<td>Описание о себе.<div class="param-opts"><b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>experience</th>
+			<td>Опыт работы.<div class="param-opts">справочник.опыт работы, <b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>city_id</th>
+			<td>Город.<div class="param-opts">справочник.города, <b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>district_id</th>
+			<td>Район.<div class="param-opts">справочник.районы, <b>обязательный</b></div></td>
+		</tr>
+		<tr>
+			<th>categories</th>
+			<td>Категории.<div class="param-opts">массив[справочник.категории], <b>обязательный</b></div></td>
+		</tr>
+	</table>
+</div>
+<div class="result">
+	<h3>Ответ <span>булево</span></h3>
+	<blockquote>Всега возвращает истину, в случае неудачной регистрации вернет ошибку. В случае успешной регистрации будет сформировано письмо или смс, если был указан телефон, с кодом подтверждения. Далее см. <a href="#registration_confirm">Подтверждение регистрации</a></blockquote>
+</div>
+<div class="erors">
+	<h3>Ошибки</h3>
+	<p>В ходе выполнения могут произойти общие ошибки.</p>
+</div>

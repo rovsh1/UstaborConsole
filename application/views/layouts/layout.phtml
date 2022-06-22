@@ -1,0 +1,61 @@
+<?php
+$user = $this->authUser;
+
+echo $this->page->doctype(); ?>
+<html>
+<?php
+$pageHead = $this->page->getHead();
+echo $pageHead->getHtml('async');
+?>
+<body class="<?php echo $this->bodyClass ? ' ' . $this->bodyClass : ''; ?>">
+	<header>
+		<div class="header-wrap">
+			<a href="<?php echo $this->url(''); ?>" class="logo"><?php echo LOGO; ?></a>
+			<?php //echo $this->page->getMenu('breadcrumbs')->render(); ?>
+			<div class="user-nav">
+				<div class="btn" id="btn-user-logo">
+					<div class="user-avatar"><?php echo user_avatar($user->image); ?></div>
+				</div>
+				<div class="menu-profile" id="user-menu"></div>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div id="mainmenu" class="mainmenu"><?php echo $this->mainmenu->render(); ?></div>
+		<div id="content" class="content"><div class="content-inner"><?php echo $content; ?></div></div>
+	</main>
+	<?php echo $pageHead->getHtml('footer'); ?>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		Application.init();
+		
+		$('#btn-user-logo').buttontoggle({url: '/account/menu/', menu: '#user-menu'});
+		
+		(function(menu){
+			menu.find('div.label').click(function(){
+				$(this).parent().toggleClass('expanded');
+			});
+			menu.find('a.current').parent().parent().addClass('expanded');
+			$(window).scroll(function(){
+				var y = $(this).scrollTop();
+				menu.css('padding-top', (y > 58 ? 0 : 58 - y));
+			});
+		})($('#mainmenu'));
+		
+		<?php if ($this->has('menu')) { ?>
+		(function(menu){
+			var btn = $('<div class="btn-menu" title="{{lang:Actions}}"></div>').appendTo(menu);
+			btn.buttontoggle({menu: menu.find('nav')});
+			menu.find('a.delete').click(function(e){
+				e.preventDefault();
+				var href = $(this).attr('href');
+				WindowConfirm('{{lang:Confirm delete operation?}}', function(){
+					Http.redirect(href);
+				});
+			});
+		})($('#menu-actions'));
+		<?php } ?>
+	});
+	</script>
+</body>
+</html>

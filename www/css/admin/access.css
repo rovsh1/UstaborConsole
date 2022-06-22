@@ -1,0 +1,5 @@
+div.access-rules dl{display:block;line-height:18px;margin-bottom:32px;}
+div.access-rules dt{font-weight:bold;margin-bottom:9px;}
+div.access-rules dt .btn-check{display:inline-block;font-size:12px;font-weight:normal;color:var(--link);border-bottom:1px dashed var(--link);cursor:pointer;margin-left:16px;line-height:14px;}
+div.access-rules dt .btn-check:hover{border-bottom-color:transparent;}
+div.access-rules dd{display:inline-block;margin-right:16px;}
