@@ -35,8 +35,8 @@ class TranslationController extends InitController {
 
 		$this->page->setTitle($this->mainmenu->lang('translation'));
 		$this->get('menu')
-			->add('add', lang('Add item'))
-			->add('sync', 'Синхронизация', 'sync/');
+			->add('add', lang('Add item'))//->add('sync', 'Синхронизация', 'sync/')
+		;
 	}
 
 	public function searchAction() {
@@ -73,6 +73,12 @@ class TranslationController extends InitController {
 	}
 
 	public function syncAction() {
+		$api = $this->getApi();
+
+		return jsonResponse(['items' => $api->select()]);
+	}
+
+	public function syncOldAction() {
 		$api = $this->getApi();
 		if ($this->id) {
 			$portal = Api::factory('Portal');
@@ -151,6 +157,17 @@ class TranslationController extends InitController {
 
 	public function getApi() {
 		return Api::factory('Translation');
+	}
+
+	protected function initAuthUser() {
+		if ($this->url->action === 'sync')
+			return $this->apiAuth();
+
+		return parent::initAuthUser();
+	}
+
+	private function apiAuth() {
+		return true;
 	}
 
 }

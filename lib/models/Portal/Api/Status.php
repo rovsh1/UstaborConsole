@@ -73,39 +73,39 @@ class Status extends AbstractApi {
 	}
 
 	public function status() {
-		return $this->call('system/status/');
+		return $this->call('system/status');
 	}
 
 	public function backupLog() {
-		return $this->call('system/backup/log/');
+		return $this->call('system/backup/log');
 	}
 
 	public function errorLog() {
-		return $this->call('system/error/log/');
+		return $this->call('system/error/log');
 	}
 
 	public function errorClear() {
-		return $this->call('system/error/clear/');
+		return $this->call('system/error/clear');
 	}
 
 	public function backupList() {
-		return $this->call('system/backup/list/');
+		return $this->call('system/backup/list');
 	}
 
 	public function robots() {
-		return $this->call('system/robots/');
+		return $this->call('system/robots');
 	}
 
 	public function cronLog() {
-		return $this->call('system/cron/log/');
+		return $this->call('system/cron/log');
 	}
 
 	public function cronTasks() {
-		return $this->call('system/cron/tasks/');
+		return $this->call('system/cron/tasks');
 	}
 
 	public function configs() {
-		return $this->call('system/configs/');
+		return $this->call('system/configs');
 	}
 
 }

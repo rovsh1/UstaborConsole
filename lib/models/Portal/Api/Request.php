@@ -72,7 +72,7 @@ class Request {
 		$ch = curl_init($requestUrl);
 		curl_setopt_array($ch, $options);
 		$result = curl_exec($ch);
-		//var_dump($requestUrl, $result);
+		//var_dump($requestUrl, $result);exit;
 		$response = new Response();
 		if (empty($result)) {
 			$errno = curl_errno($ch);

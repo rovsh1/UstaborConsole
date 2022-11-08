@@ -7,7 +7,7 @@ abstract class AbstractApi {
 	protected $apiUrl;
 
 	public function __construct($portal) {
-		if ($portal->domain === 'ustabor.uz')
+		if (in_array($portal->domain, ['ustabor.uz', 'fixinglist.com']))
 			$this->apiUrl = 'https://sync.' . $portal->domain . '/';
 		else
 			$this->apiUrl = 'https://api.' . $portal->domain . '/';
