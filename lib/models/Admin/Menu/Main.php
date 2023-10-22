@@ -27,6 +27,7 @@ class Main {
 			->add('promotions', 'Продвижение', '/report/promotions/')
 			->add('masters', 'Мастера', '/report/masters/')
 			->add('customers', 'Заказчики', '/report/customers/')
+			->add('customers', 'Заказчики', '/report/more-than-10-clicks-customers/')
 			->add('master_statistics', 'Статистика по мастерам', '/report/master-statistics/')
 			->add('customer_statistics', 'Статистика по заказчикам', '/report/customer-statistics/')
 			//->add('masters', 'Мастера', '/report/masters/')

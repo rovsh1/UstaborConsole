@@ -124,7 +124,7 @@ class ReportController extends InitController {
 		$form
 			//->addElement('country_id')
 			->addElement('created');
-		$this->reportFormSubmit($form, 'customers');
+		$this->reportFormSubmit($form, 'more-than-10-clicks-customers');
 
 		$this->form = $form;
 		$this->page->setTitle('Выгрузка заказчиков');
@@ -380,7 +380,7 @@ class ReportController extends InitController {
 			$data = $form->getData();
 			$portal = Api::factory('Portal');
 			$portal->findById($data['portal_id']);
-			$response = $portal->getApi('Report')->$action($data);
+			$response = $portal->getApi('Report')->report($action, $data);
 			//var_dump($response);
 			if ($response->hasException()) {
 				$exception = $response->getException();
