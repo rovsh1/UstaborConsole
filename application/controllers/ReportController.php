@@ -153,7 +153,7 @@ class ReportController extends InitController {
 			//->addElement('country_id')
 			//->addElement('category_id')
 		;
-		$this->reportFormSubmit($form, 'request1');
+		$this->reportFormSubmit($form, 'request-1');
 
 		$this->form = $form;
 		$this->page->setTitle('Отчет по количеству');
@@ -167,7 +167,7 @@ class ReportController extends InitController {
 			->addElement('site_id')
 			->addElement('country_id')
 			->addElement('category_id');
-		$this->reportFormSubmit($form, 'request2');
+		$this->reportFormSubmit($form, 'request-2');
 
 		$this->form = $form;
 		$this->page->setTitle('Отчет по заявкам');
@@ -179,7 +179,7 @@ class ReportController extends InitController {
 		$form
 			->addElement('site_id')
 			->addElement('country_id');
-		$this->reportFormSubmit($form, 'request3');
+		$this->reportFormSubmit($form, 'request-3');
 
 		$this->form = $form;
 		$this->page->setTitle('Мастера по категориям ');
