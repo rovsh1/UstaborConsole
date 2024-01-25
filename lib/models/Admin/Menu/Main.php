@@ -27,9 +27,10 @@ class Main {
 			->add('promotions', 'Продвижение', '/report/promotions/')
 			->add('masters', 'Мастера', '/report/masters/')
 			->add('customers', 'Заказчики', '/report/customers/')
-			->add('customers', 'Заказчики', '/report/more-than-10-clicks-customers/')
 			->add('master_statistics', 'Статистика по мастерам', '/report/master-statistics/')
+            ->add('master_payment_statistics', 'Статистика платежей', '/report/master-payment-statistics/')
 			->add('customer_statistics', 'Статистика по заказчикам', '/report/customer-statistics/')
+            ->add('customers', 'Более 10 нажатий', '/report/more_than_10_clicks_customers/')
 			//->add('masters', 'Мастера', '/report/masters/')
 
 			->addGroup('category', 'Категории')
