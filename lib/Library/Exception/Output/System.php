@@ -54,7 +54,7 @@ class System extends \Exception\Output {
 	 * @return string
 	 */
 	protected function getFileLink($file, $line) {
-		if (is_null($file) || !strlen($this->_fileLinkFormat)) {
+		if (is_null($file) || empty($this->_fileLinkFormat) || !strlen($this->_fileLinkFormat)) {
 			return parent::getFileLink($file, $line);
 		}
 		$fileLink = str_replace(array('%f', '%l'), array(urlencode($file), $line), $this->_fileLinkFormat);

@@ -39,7 +39,7 @@ class Translation extends Api {
 		}
 		$columns[] = 'name';
 		$columns[] = 'description';
-		call_user_func_array([$settings, 'enableQuickSearch'], $columns);
+        $settings->enableQuickSearch(...array_values($columns));
 		//$settings->quicksearch->setBounds('right');
 		//$settings->filter('translation_items.path<>"admin"');
 		//$settings->filter('translation_items.deletion_mark=0');

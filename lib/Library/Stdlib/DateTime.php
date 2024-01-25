@@ -67,7 +67,7 @@ class DateTime extends BaseDateTime{
 		parent::__construct($time, $timezone);
 	}
 	
-	public function format($format) {
+	public function format($format):string {
 		$datetime = $this;
 		foreach (self::$formats as $name => $f) {
 			$callback = $f[1];

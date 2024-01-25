@@ -137,7 +137,7 @@ abstract class AbstractContent{
 		if (!isset($this->headers['Content-Length']))
 			$this->setHeader('Content-Length', strlen($this->getContent()));
 		foreach ($this->headers as $name => $value) {
-			header($name . ': ' . $value[0], $value[1], $value[2]);
+			header($name . ': ' . $value[0], $value[1], $value[2] ?? 0);
 		}
 	}
 	

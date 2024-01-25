@@ -119,7 +119,7 @@ class Mysqli {
 		}
 
 		$this->resource = new \mysqli();
-		$this->resource->init();
+//		$this->resource->init();
 
 		$this->resource->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
 

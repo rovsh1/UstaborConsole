@@ -4,11 +4,11 @@ use Api\Model\Translation;
 $columns = Translation::getColumns();
 if ($this->items) { ?><table>
 	<?php foreach ($this->items as $item) { ?><tr data-id="<?php echo $item['id']; ?>" data-path="<?php echo $item['path']; ?>">
-		<th><a href="#" title="<?php echo $item['name']; ?>"><?php echo $item['value_ru'] ? htmlspecialchars($item['value_ru']) : $item['name']; ?></a></th>
+		<th><a href="#" title="<?php echo $item['name']; ?>"><?php echo $item['value_ru'] ? htmlspecialchars($item['value_ru'] ?? '') : $item['name']; ?></a></th>
 		<?php foreach ($columns as $l => $n) { ?>
 		<td class="language <?php echo $item[$n] ? 'ready' : 'empty'; ?>" data-language="<?php echo $l; ?>">
 			<img title="" src="/images/flag/<?php echo $l; ?>.svg" />
-			<input type="hidden" value="<?php echo htmlspecialchars($item[$n]); ?>" />
+			<input type="hidden" value="<?php echo htmlspecialchars($item[$n] ?? ''); ?>" />
 		</td><?php } ?>
 	</tr><?php } ?>
 </table><?php } else { ?>

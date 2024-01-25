@@ -40,7 +40,7 @@ class Response {
 		if (null !== $this->result)
 			return $this->result;
 
-		$data = json_decode($this->content) ?: false;
+		$data = $this->content ? json_decode($this->content) : false;
 		if (is_object($data)) {
 			$status = $data->status;
 			if ($status && $status->code === 'ok')

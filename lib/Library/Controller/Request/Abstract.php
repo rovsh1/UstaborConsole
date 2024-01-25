@@ -105,7 +105,7 @@ class Controller_Request_Abstract{
     public function getActionName()
     {
         if (null === $this->_action) {
-            $this->_action = str_replace('-', '_', $this->getParam($this->getActionKey()));
+            $this->_action = str_replace('-', '_', $this->getParam($this->getActionKey()) ?? '');
         }
 
         return $this->_action;
